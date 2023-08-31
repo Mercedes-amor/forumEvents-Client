@@ -29,7 +29,7 @@ function Login() {
       localStorage.setItem("authToken", response.data.authToken);
 
       await verifyToken();
-      navigate("/user");
+      navigate("/:userId");
     } catch (error) {
       console.log(error);
     }
