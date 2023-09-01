@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import service from "../services/service.config";
 import CreateSession from "../components/CreateSession";
+import SessionsList from "../components/SessionsList";
 
 export default function EventDetails() {
   const params = useParams();
   const navigate = useNavigate();
   const [eventDetails, setEventDetails] = useState(null);
   const [isFormShowing, setIsFormShowing] = useState(false);
-
 
   useEffect(() => {
     getData();
@@ -34,7 +34,6 @@ export default function EventDetails() {
     }
   };
 
-
   const handleEventDelete = async () => {
     try {
       await service.delete(`/events/${params.eventId}`);
@@ -49,29 +48,34 @@ export default function EventDetails() {
 
   return (
     <div>
-    <div key={eventDetails.responseEvent._id}>
-      <img src={eventDetails.responseEvent.imgEvent} alt="Imagen Evento" />
-      <h3>{eventDetails.responseEvent.eventName}</h3>
-      <p>{eventDetails.responseEvent.sector}</p>
-      <p>
-        {eventDetails.responseEvent.startDate.slice(0, 10)} -{" "}
-        {eventDetails.responseEvent.endDate.slice(0, 10)}
-      </p>
+      <div key={eventDetails.responseEvent._id}>
+        <img src={eventDetails.responseEvent.imgEvent} alt="Imagen Evento" />
+        <h3>{eventDetails.responseEvent.eventName}</h3>
+        <p>{eventDetails.responseEvent.sector}</p>
+        <p>
+          {eventDetails.responseEvent.startDate.slice(0, 10)} -{" "}
+          {eventDetails.responseEvent.endDate.slice(0, 10)}
+        </p>
 
-      <Link to={`/events/${params.eventId}`}>
-        {" "}
-        <button>Modificar</button>{" "}
-      </Link>
-      <button onClick={handleEventDelete}>Eliminar</button>
-    </div>
+        <Link to={`/events/${params.eventId}`}>
+          {" "}
+          <button>Modificar</button>{" "}
+        </Link>
+        <button onClick={handleEventDelete}>Eliminar</button>
+      </div>
 
-<button onClick={handleShowForm}>Crear sesión</button>
+      <div>
+        <SessionsList />
+      </div>
 
+      <button onClick={handleShowForm}>Crear sesión</button>
 
-{isFormShowing ? <CreateSession  params={params.eventId} setIsFormShowing={setIsFormShowing}/> : null}
-   
-
-
+      {isFormShowing ? (
+        <CreateSession
+          params={params.eventId}
+          setIsFormShowing={setIsFormShowing}
+        />
+      ) : null}
     </div>
   );
 }

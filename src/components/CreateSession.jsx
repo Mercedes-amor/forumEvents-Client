@@ -125,7 +125,7 @@ export default function CreateSession(props) {
       </button>
 
       {errorMessage ? <p>{errorMessage}</p> : null}
-      {successMessage ? <p>{successMessage}</p> : null}
+      {/* {successMessage ? <p>{successMessage}</p> : null} */}
     </form>
   );
 }
