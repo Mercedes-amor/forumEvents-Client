@@ -5,6 +5,7 @@ import service from "../services/service.config";
 export default function CreateSession(props) {
   const paramsEventId = props.params;
   const setIsFormShowing = props.setIsFormShowing
+  const handleRefresh = props.handleRefresh
   const navigate = useNavigate();
 
   console.log("este console es", paramsEventId);
@@ -30,6 +31,7 @@ export default function CreateSession(props) {
       await service.post(`/events/${paramsEventId}/sessions`, { newSession });
       
       setIsFormShowing(false)
+      handleRefresh()
     //   setSuccessMessage("todo ok");
     } catch (error) {
       console.log(error);

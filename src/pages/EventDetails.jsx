@@ -2,13 +2,15 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import service from "../services/service.config";
 import CreateSession from "../components/CreateSession";
-import SessionsList from "../components/SessionsList";
 
 export default function EventDetails() {
   const params = useParams();
   const navigate = useNavigate();
   const [eventDetails, setEventDetails] = useState(null);
   const [isFormShowing, setIsFormShowing] = useState(false);
+  const [isEditSessionShowing, setIsEditSessionhowing] = useState(false);
+
+  // const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     getData();
@@ -42,13 +44,26 @@ export default function EventDetails() {
       console.log(error);
     }
   };
+
+  const handleRefresh = () => {
+    // setIsLoading(true)
+    getData();
+  };
+
+  const handleShowEditSession = () => {
+    if (isEditSessionShowing === true) {
+      setIsEditSessionhowing(false);
+    } else {
+      setIsEditSessionhowing(true);
+    }
+  }
   if (eventDetails === null) {
     return <h3>...cargando</h3>;
   }
 
   return (
-    <div>
-      <div key={eventDetails.responseEvent._id}>
+    <div key={eventDetails.responseEvent._id}>
+      <div >
         <img src={eventDetails.responseEvent.imgEvent} alt="Imagen Evento" />
         <h3>{eventDetails.responseEvent.eventName}</h3>
         <p>{eventDetails.responseEvent.sector}</p>
@@ -63,10 +78,31 @@ export default function EventDetails() {
         </Link>
         <button onClick={handleEventDelete}>Eliminar</button>
       </div>
+      {eventDetails.responseSession.map((eachSession) => {
+        return (
+          <div>
+            {isEditSessionShowing ? (
+              <div>
+              <p>formulario</p>
+              <button onClick={handleShowEditSession}>guardar cambios</button>
+              </div>
+            ) : (
+              <div key={eventDetails.responseSession._id}>
+                <h2>Nombre: {eachSession.sessionName}</h2>
+                <p>Descripción: {eachSession.description}</p>
+                <p>Día: {eachSession.day}</p>
+                <p>Fecha: {eachSession.dateSession}</p>
+                <p>Sala: {eachSession.hall}</p>
+                <p>Aforo: {eachSession.capacityHall}</p>
+                <button onClick={handleShowEditSession}>Editar sesión</button>
 
-      <div>
-        <SessionsList />
-      </div>
+              </div>
+            )}
+
+          </div>
+        );
+      })}
+      <div></div>
 
       <button onClick={handleShowForm}>Crear sesión</button>
 
@@ -74,6 +110,7 @@ export default function EventDetails() {
         <CreateSession
           params={params.eventId}
           setIsFormShowing={setIsFormShowing}
+          handleRefresh={handleRefresh}
         />
       ) : null}
     </div>
