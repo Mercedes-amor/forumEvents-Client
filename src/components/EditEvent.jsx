@@ -1,49 +1,57 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import service from "../services/service.config";
 
-export default function CreateEvent() {
+export default function EditEvent() {
+  const params = useParams();
+
   const navigate = useNavigate();
 
-  const [newEvent, setNewEvent] = useState({
-    eventName: "",
-    startDate: "",
-    endDate: "",
-    itsFree: true,
-    capacity: 0,
-    sector: "Otro",
-    description: "",
-    imgEvent: "",
-  });
+  const [editEvent, setEditEvent] = useState(null);
 
-  const handleAddEvent = async (e) => {
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const getData = async () => {
+    try {
+      const response = await service.get(`/events/${params.eventId}`);
+console.log("prueba response",response.data)
+      setEditEvent(response.data.responseEvent);
+      
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const handleUpdateEvent = async (e) => {
     e.preventDefault();
     try {
-   
-   await service.post("/events", { newEvent
-    
-   }) 
-   
-   navigate("/events")
+      await service.put(`/events/${params.eventId}`, { editEvent });
 
+      navigate(`/events/${params.eventId}/details`);
     } catch (error) {}
   };
 
   const handleFormChange = (input) => {
-    setNewEvent({
-      ...newEvent,
+    setEditEvent({
+      ...editEvent,
       [input.target.name]: input.target.value,
     });
   };
 
+  if(editEvent === null ) {
+    return <h3>...cargando</h3>}
+
+    console.log("edit event", editEvent)
   return (
+  
     <form>
       <label htmlFor="eventName">Nombre del evento</label>
       <input
         type="text"
         name="eventName"
         onChange={handleFormChange}
-        value={newEvent.eventName}
+        value={editEvent.eventName}
       />
       <br />
       <label htmlFor="startDate">Fecha de inicio</label>
@@ -51,26 +59,25 @@ export default function CreateEvent() {
         type="date"
         name="startDate"
         onChange={handleFormChange}
-        value={newEvent.startDate}
+        value={editEvent.startDate}
       />
+
       <br />
       <label htmlFor="endtDate">Fecha de finalización</label>
       <input
         type="date"
         name="endDate"
         onChange={handleFormChange}
-        value={newEvent.endDate}
+        value={editEvent.endDate}
       />
       <br />
       <label htmlFor="itsFree">¿Es gratuito?</label>
       <select
         name="itsFree"
         onChange={handleFormChange}
-        value={newEvent.itsFree}
+        value={editEvent.itsFree}
       >
-        <option value="true">
-          si
-        </option>
+        <option value="true">si</option>
         <option value="false">No</option>
       </select>
       <br />
@@ -79,44 +86,41 @@ export default function CreateEvent() {
         type="Number"
         name="capacity"
         onChange={handleFormChange}
-        value={newEvent.capacity}
+        value={editEvent.capacity}
       />
       <br />
       <label htmlFor="sector">Sector</label>
       <select
         name="sector"
         onChange={handleFormChange}
-        value={newEvent.sector}
-     
+        value={editEvent.sector}
       >
         <option value="otro">Otro</option>
-        <option value="tecnológico" >
-        tecnológico
-        </option>
-        <option value="medicina" >medicina</option>
+        <option value="tecnológico">tecnológico</option>
+        <option value="medicina">medicina</option>
         <option value="ciencia">ciencia</option>
         <option value="gastronómico">gastronómico</option>
         <option value="ocio">ocio</option>
       </select>
       <br />
-      <label htmlFor="imgEvent">Imagen del evento</label>
+      {/* <label htmlFor="imgEvent">Imagen del evento</label>
       <input
         type="file"
         name="imgEvent"
         onChange={handleFormChange}
-        value={newEvent.imgEvent}
-      />
+        value={editEvent.imgEvent}
+      /> */}
       <br />
       <label htmlFor="description">Descripción del evento</label>
       <input
         type="text"
         name="description"
         onChange={handleFormChange}
-        value={newEvent.description}
+        value={editEvent.description}
       />
       <br />
-      <button type="submit" onClick={handleAddEvent}>
-        Crear evento
+      <button type="submit" onClick={handleUpdateEvent}>
+        Guardar cambios
       </button>
     </form>
   );

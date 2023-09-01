@@ -8,6 +8,8 @@ import Signup from "./pages/Signup";
 import UserProfile from "./pages/UserProfile";
 import EventsList from "./pages/EventsList"
 import CreateEvent from "./pages/CreateEvent";
+import EventDetails from "./pages/EventDetails";
+import EditEvent from "./components/EditEvent";
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/events" element={<EventsList />} />
         <Route path="/events/create-event" element={<CreateEvent />} />
+        <Route path="/events/:eventId/details" element={<EventDetails />} />
+        <Route path="/events/:eventId" element={<EditEvent />}/>
         <Route
           path="/:userId"
           element={

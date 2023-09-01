@@ -35,6 +35,8 @@ export default function EventsList() {
             <p>
               {eachEvent.startDate.slice(0,10)} - {eachEvent.endDate.slice(0,10)}
             </p>
+
+            <Link to={`/events/${eachEvent._id}/details`}>Detalles</Link>
           </div>
         );
       })}

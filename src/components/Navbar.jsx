@@ -12,7 +12,7 @@ export default function Navbar() {
       <Link to="/signup"><button>signup</button></Link>
       <Link to="/login"><button>login</button></Link>
       <Link to="/events"><button>Eventos</button></Link>
-    
+      <Link to="/events/create-event"><button>Crear evento</button></Link>
     </nav>
     </div>
   )
