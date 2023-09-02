@@ -1,10 +1,45 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import service from "../services/service.config";
+import { uploadImageService } from "../services/upload.services";
 
 export default function CreateEvent() {
   const navigate = useNavigate();
+  // CLOUDINARY
+  const [imageUrl, setImageUrl] = useState(null);
+  const [isUploading, setIsUploading] = useState(false); // for a loading animation effect
 
+  // below function should be the only function invoked when the file type input changes => onChange={handleFileUpload}
+  const handleFileUpload = async (event) => {
+    // console.log("The file to be uploaded is: ", e.target.files[0]);
+
+    if (!event.target.files[0]) {
+      // to prevent accidentally clicking the choose file button and not selecting a file
+      return;
+    }
+
+    setIsUploading(true); // to start the loading animation
+
+    const uploadData = new FormData(); // images and other files need to be sent to the backend in a FormData
+    uploadData.append("imgEvent", event.target.files[0]);
+    //                   |
+    //     this name needs to match the name used in the middleware => uploader.single("image")
+
+    try {
+      const response = await uploadImageService(uploadData);
+      // or below line if not using services
+      // const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/upload`, uploadData)
+
+      setImageUrl(response.data.imageUrl);
+      //                          |
+      //     this is how the backend sends the image to the frontend => res.json({ imageUrl: req.file.path });
+
+      setIsUploading(false); // to stop the loading animation
+      
+    } catch (error) {
+      navigate("/error");
+    }
+  };
   const [newEvent, setNewEvent] = useState({
     eventName: "",
     startDate: "",
@@ -13,27 +48,35 @@ export default function CreateEvent() {
     capacity: 0,
     sector: "Otro",
     description: "",
-    imgEvent: "",
+    imgEvent:"",
   });
 
   const handleAddEvent = async (e) => {
     e.preventDefault();
     try {
-   
-   await service.post("/events", { newEvent
-    
-   }) 
-   
-   navigate("/events")
-
+      await service.post("/events", { 
+        eventName: newEvent.eventName,
+        startDate: newEvent.startDate,
+        endDate: newEvent.endDate,
+        itsFree: newEvent.itsFree,
+        capacity: newEvent.capacity,
+        sector: newEvent.sector,
+        description: newEvent.description,
+        imgEvent:imageUrl,
+      });
+      console.log(newEvent)
+      navigate("/events");
     } catch (error) {}
   };
 
   const handleFormChange = (input) => {
     setNewEvent({
       ...newEvent,
-      [input.target.name]: input.target.value,
+      [input.target.name]: input.target.value, 
+      // [imgEvent]: imageUrl
     });
+    // setImageUrl()
+    // handleFileUpload
   };
 
   return (
@@ -68,9 +111,7 @@ export default function CreateEvent() {
         onChange={handleFormChange}
         value={newEvent.itsFree}
       >
-        <option value="true">
-          si
-        </option>
+        <option value="true">si</option>
         <option value="false">No</option>
       </select>
       <br />
@@ -83,28 +124,23 @@ export default function CreateEvent() {
       />
       <br />
       <label htmlFor="sector">Sector</label>
-      <select
-        name="sector"
-        onChange={handleFormChange}
-        value={newEvent.sector}
-     
-      >
+      <select name="sector" onChange={handleFormChange} value={newEvent.sector}>
         <option value="otro">Otro</option>
-        <option value="tecnológico" >
-        tecnológico
-        </option>
-        <option value="medicina" >medicina</option>
+        <option value="tecnológico">tecnológico</option>
+        <option value="medicina">medicina</option>
         <option value="ciencia">ciencia</option>
         <option value="gastronómico">gastronómico</option>
         <option value="ocio">ocio</option>
       </select>
       <br />
+      {/* IMAGEN */}
       <label htmlFor="imgEvent">Imagen del evento</label>
       <input
         type="file"
         name="imgEvent"
-        onChange={handleFormChange}
-        value={newEvent.imgEvent}
+        onChange={handleFileUpload}
+        // value={imageUrl}
+        disabled={isUploading}
       />
       <br />
       <label htmlFor="description">Descripción del evento</label>

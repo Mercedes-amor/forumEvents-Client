@@ -58,6 +58,15 @@ export default function EventDetails() {
       setIsEditSessionhowing(true);
     }
   }
+
+  const handleSessionDelete = async (sessionId) => {
+    try {
+      await service.delete(`/events/${params.eventId}/sessions/${sessionId}`);
+      handleRefresh();
+    } catch (error) {
+      console.log(error);
+    }
+  };
   if (eventDetails === null) {
     return <h3>...cargando</h3>;
   }
@@ -91,7 +100,7 @@ export default function EventDetails() {
               <EditSession sessionId={eachSession._id} eventId={params.eventId}
           setIsEditSessionhowing={setIsEditSessionhowing}
           handleRefresh={handleRefresh}/>
-              <button onClick={handleShowEditSession}>guardar cambios</button>
+              <button onClick={handleShowEditSession}>cerrar formulario</button>
               </div>
             ) : (
               <div key={eventDetails.responseSession._id}>
@@ -102,7 +111,7 @@ export default function EventDetails() {
                 <p>Sala: {eachSession.hall}</p>
                 <p>Aforo: {eachSession.capacityHall}</p>
                 <button onClick={handleShowEditSession}>Editar sesión</button>
-
+                <button onClick={ () => handleSessionDelete(eachSession._id)}>Borrar sesión</button>
               </div>
             )}
 

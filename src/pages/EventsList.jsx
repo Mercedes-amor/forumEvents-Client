@@ -29,7 +29,7 @@ export default function EventsList() {
       {allEventsList.map((eachEvent) => {
         return (
           <div key={eachEvent._id}>
-            <img src={eachEvent.imgEvent} alt="Imagen Evento" />
+            <img src={eachEvent.imgEvent} alt="Imagen Evento" width={300}/>
             <h3>{eachEvent.eventName}</h3>
             <p>{eachEvent.sector}</p>
             <p>
