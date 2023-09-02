@@ -2,14 +2,15 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import service from "../services/service.config";
 import CreateSession from "../components/CreateSession";
+import EditSession from "../components/EditSession";
 
 export default function EventDetails() {
   const params = useParams();
   const navigate = useNavigate();
   const [eventDetails, setEventDetails] = useState(null);
   const [isFormShowing, setIsFormShowing] = useState(false);
-  const [isEditSessionShowing, setIsEditSessionhowing] = useState(false);
-
+  const [isEditSessionShowing, setIsEditSessionhowing] = useState();
+  // console.log(isEditSessionShowing)
   // const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
@@ -78,12 +79,18 @@ export default function EventDetails() {
         </Link>
         <button onClick={handleEventDelete}>Eliminar</button>
       </div>
-      {eventDetails.responseSession.map((eachSession) => {
+      {eventDetails.responseSession.map((eachSession, i) => {
         return (
-          <div>
+          
+          <div key={eachSession._id}>
+            {console.log(eachSession)}
+            {/* {setIsEditSessionhowing({...isEditSessionShowing, ["i"+eachSession._id] : false})}
+            {console.log(isEditSessionShowing)} */}
             {isEditSessionShowing ? (
               <div>
-              <p>formulario</p>
+              <EditSession sessionId={eachSession._id} eventId={params.eventId}
+          setIsEditSessionhowing={setIsEditSessionhowing}
+          handleRefresh={handleRefresh}/>
               <button onClick={handleShowEditSession}>guardar cambios</button>
               </div>
             ) : (
