@@ -26,7 +26,7 @@ export default function EditSession() {
         try {
           await service.put(`/events/${eventId}/sessions/${sessionId}`, { editSession });
         
-       navigate(`/events/${eventId}/${sessionId}`)
+       navigate(`/events/${eventId}/details`)
         } catch (error) {
           console.log(error);
           if (error.response && error.response.status === 400) {

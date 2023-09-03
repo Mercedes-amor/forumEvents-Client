@@ -6,6 +6,7 @@ const AuthContext = createContext();
 function AuthWrapper(props) {
   const [isUserActive, setIsUserActive] = useState(false);
   const [activeUserId, setActiveUserId] = useState(null);
+ const [userRole, setUserRole] = useState(null)
 
   const [isPageLoading, setIsPageLoading] = useState(true);
 
@@ -20,7 +21,7 @@ function AuthWrapper(props) {
     try {
       const response = await service.get("/auth/verify");
       // console.log("response",response);
-
+      setUserRole(response.data.role)
       setIsUserActive(true);
       setActiveUserId(response.data._id);
       setIsPageLoading(false);
@@ -36,6 +37,7 @@ function AuthWrapper(props) {
     verifyToken, // validar el token en login, volver a la app
     isUserActive, // para mostrar enlaces dependiendo de si el ususario esta loeado o no. Ver paginas privadas.
     activeUserId, // para mostrar funcionalidades de borra o editar solo cuando el usuario sea el dueño de un documento.
+    userRole
   };
 
   if (isPageLoading === true) {

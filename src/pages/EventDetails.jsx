@@ -7,8 +7,8 @@ import { AuthContext } from "../context/auth.context";
 import { useContext } from "react";
 
 export default function EventDetails() {
-  const { activeUserId } = useContext(AuthContext);
-
+  const { activeUserId, userRole } = useContext(AuthContext);
+ console.log("role",userRole)
   const params = useParams();
 
   const navigate = useNavigate();

@@ -17,7 +17,7 @@ const { sessionId, eventId, setIsEditSessionhowing, handleRefresh } = props
         endHour: "",
         isAvailable: "false",
         hall: "",
-        capacityHall: 0,
+       
       });
       const [errorMessage, setErrorMessage] = useState("");
 
@@ -105,19 +105,19 @@ const { sessionId, eventId, setIsEditSessionhowing, handleRefresh } = props
         value={editSession.hall}
       />
       <br />
-      <label htmlFor="capacityHall">Capacidad de la sala</label>
+      {/* <label htmlFor="capacityHall">Capacidad de la sala</label>
       <input
         type="Number"
         name="capacityHall"
         onChange={handleFormChange}
         value={editSession.capacityHall}
-      />
+      /> */}
       <br />
       <p>¿Esta disponible?</p>
-      <input type="radio"  name="isAvailable" value="true" />
+      <input onChange={handleFormChange} type="radio"  name="isAvailable" value="true" />
       <label htmlFor="isAvailable" >Si</label>
       <br />
-      <input type="radio"  name="isAvailable" value="false" />
+      <input  onChange={handleFormChange} type="radio"  name="isAvailable" value="false" />
       <label htmlFor="isAvailable" >No</label>
       <br />
         {errorMessage ? <p>{errorMessage}</p> : null}
