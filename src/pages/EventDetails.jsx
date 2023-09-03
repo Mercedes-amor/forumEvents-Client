@@ -13,6 +13,7 @@ export default function EventDetails() {
   // console.log(isEditSessionShowing)
   // const [isLoading, setIsLoading] = useState(true)
 
+
   useEffect(() => {
     getData();
   }, []);
