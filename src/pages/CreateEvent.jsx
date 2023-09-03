@@ -8,7 +8,7 @@ export default function CreateEvent() {
   // CLOUDINARY
   const [imageUrl, setImageUrl] = useState(null);
   const [isUploading, setIsUploading] = useState(false); // for a loading animation effect
-
+  const [errorMessage, setErrorMessage] = useState("");
   // below function should be the only function invoked when the file type input changes => onChange={handleFileUpload}
   const handleFileUpload = async (event) => {
     // console.log("The file to be uploaded is: ", e.target.files[0]);
@@ -37,7 +37,7 @@ export default function CreateEvent() {
       setIsUploading(false); // to stop the loading animation
       
     } catch (error) {
-      navigate("/error");
+      
     }
   };
   const [newEvent, setNewEvent] = useState({
@@ -66,7 +66,11 @@ export default function CreateEvent() {
       });
       console.log(newEvent)
       navigate("/events");
-    } catch (error) {}
+    } catch (error) {
+      if (error.response && error.response.status === 400) {
+        setErrorMessage(error.response.data.errorMessage);
+      }
+    }
   };
 
   const handleFormChange = (input) => {
@@ -154,6 +158,7 @@ export default function CreateEvent() {
       <button type="submit" onClick={handleAddEvent}>
         Crear evento
       </button>
+      {errorMessage ? <p>{errorMessage}</p> : null}
     </form>
   );
 }

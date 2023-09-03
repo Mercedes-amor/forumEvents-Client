@@ -3,16 +3,23 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import service from "../services/service.config";
 import CreateSession from "../components/CreateSession";
 import EditSession from "../components/EditSession";
+import { AuthContext } from "../context/auth.context";
+import { useContext } from "react";
 
 export default function EventDetails() {
+  const { activeUserId } = useContext(AuthContext);
+
   const params = useParams();
+
   const navigate = useNavigate();
   const [eventDetails, setEventDetails] = useState(null);
   const [isFormShowing, setIsFormShowing] = useState(false);
   const [isEditSessionShowing, setIsEditSessionhowing] = useState();
+  const [editSession, setEditSession] = useState({
+    idAsistant: activeUserId,
+  });
   // console.log(isEditSessionShowing)
   // const [isLoading, setIsLoading] = useState(true)
-
 
   useEffect(() => {
     getData();
@@ -58,7 +65,14 @@ export default function EventDetails() {
     } else {
       setIsEditSessionhowing(true);
     }
-  }
+  };
+  const handleJoinSession = async (sessionId) => {
+    try {
+      await service.put(`/events/${params.eventId}/sessions/${sessionId}`, {
+        editSession,
+      });
+    } catch (error) {}
+  };
 
   const handleSessionDelete = async (sessionId) => {
     try {
@@ -74,7 +88,7 @@ export default function EventDetails() {
 
   return (
     <div key={eventDetails.responseEvent._id}>
-      <div >
+      <div>
         <img src={eventDetails.responseEvent.imgEvent} alt="Imagen Evento" />
         <h3>{eventDetails.responseEvent.eventName}</h3>
         <p>{eventDetails.responseEvent.sector}</p>
@@ -91,17 +105,21 @@ export default function EventDetails() {
       </div>
       {eventDetails.responseSession.map((eachSession, i) => {
         return (
-          
           <div key={eachSession._id}>
             {console.log(eachSession)}
             {/* {setIsEditSessionhowing({...isEditSessionShowing, ["i"+eachSession._id] : false})}
             {console.log(isEditSessionShowing)} */}
             {isEditSessionShowing ? (
               <div>
-              <EditSession sessionId={eachSession._id} eventId={params.eventId}
-          setIsEditSessionhowing={setIsEditSessionhowing}
-          handleRefresh={handleRefresh}/>
-              <button onClick={handleShowEditSession}>cerrar formulario</button>
+                <EditSession
+                  sessionId={eachSession._id}
+                  eventId={params.eventId}
+                  setIsEditSessionhowing={setIsEditSessionhowing}
+                  handleRefresh={handleRefresh}
+                />
+                <button onClick={handleShowEditSession}>
+                  cerrar formulario
+                </button>
               </div>
             ) : (
               <div key={eventDetails.responseSession._id}>
@@ -111,11 +129,26 @@ export default function EventDetails() {
                 <p>Fecha: {eachSession.dateSession}</p>
                 <p>Sala: {eachSession.hall}</p>
                 <p>Aforo: {eachSession.capacityHall}</p>
+
+                {eachSession.isAvailable && (
+                  <Link
+                    to={`/events/${params.eventId}/${eachSession._id}/${activeUserId}`}
+                  >
+                    <button>Reservar sesión</button>
+                  </Link>
+                )}
+                {eachSession.hostedBy ? (
+                  <button onClick={() => handleJoinSession(eachSession._id)}>
+                    Apuntate a la sesión
+                  </button>
+                ) : null}
+
                 <button onClick={handleShowEditSession}>Editar sesión</button>
-                <button onClick={ () => handleSessionDelete(eachSession._id)}>Borrar sesión</button>
+                <button onClick={() => handleSessionDelete(eachSession._id)}>
+                  Borrar sesión
+                </button>
               </div>
             )}
-
           </div>
         );
       })}

@@ -8,7 +8,7 @@ export default function CreateSession(props) {
   const handleRefresh = props.handleRefresh
   const navigate = useNavigate();
 
-  console.log("este console es", paramsEventId);
+  // console.log("este console es", paramsEventId);
 
   const [newSession, setNewSession] = useState({
     sessionName: "",
@@ -26,6 +26,7 @@ export default function CreateSession(props) {
 //   const [successMessage, setSuccessMessage] = useState("");
 
   const handleAddSession = async (e) => {
+    // console.log("sesion antes de llegar a la db", newSession)
     e.preventDefault();
     try {
       await service.post(`/events/${paramsEventId}/sessions`, { newSession });
@@ -115,10 +116,10 @@ export default function CreateSession(props) {
       />
       <br />
       <p>¿Esta disponible?</p>
-      <input type="radio"  name="isAvailable" value="true" />
+      <input onChange={handleFormChange} type="radio"  name="isAvailable" value="true" />
       <label htmlFor="isAvailable" >Si</label>
       <br />
-      <input type="radio"  name="isAvailable" value="false" />
+      <input onChange={handleFormChange} type="radio"  name="isAvailable" value="false" />
       <label htmlFor="isAvailable" >No</label>
       <br />
       <br />
