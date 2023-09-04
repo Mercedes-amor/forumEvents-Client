@@ -8,7 +8,7 @@ import { useContext } from "react";
 
 export default function EventDetails() {
   const { activeUserId, userRole } = useContext(AuthContext);
- console.log("role",userRole)
+  console.log("role", userRole);
   const params = useParams();
 
   const navigate = useNavigate();
@@ -60,18 +60,14 @@ export default function EventDetails() {
   };
 
   const handleShowEditSession = (sessionIdEditing) => {
+    setIsEditSessionhowing(sessionIdEditing);
 
-    setIsEditSessionhowing(sessionIdEditing)
-
-    console.log(sessionIdEditing)
+    console.log(sessionIdEditing);
     // if (isEditSessionShowing === eachSession._id) {
     //   setIsEditSessionhowing(eachSession._id);
     // } else {
     //   setIsEditSessionhowing(true);
     // }
-
-
-
   };
   const handleJoinSession = async (sessionId) => {
     try {
@@ -110,58 +106,71 @@ export default function EventDetails() {
         </Link>
         <button onClick={handleEventDelete}>Eliminar</button>
       </div>
-      {eventDetails.responseSession.map((eachSession, i) => {
+      {eventDetails.sessionsArray.map((eachDay, i) => {
+        console.log("eachDay", eachDay);
         return (
-          <div key={eachSession._id}>
-            {/* {console.log(eachSession)} */}
-            {/* {setIsEditSessionhowing({...isEditSessionShowing, ["i"+eachSession._id] : false})}
-            {console.log(isEditSessionShowing)} */}
-            {isEditSessionShowing == eachSession._id.toString() ? (
-              <div>
-                <EditSession
-                  sessionId={eachSession._id}
-                  eventId={params.eventId}
-                  setIsEditSessionhowing={setIsEditSessionhowing}
-                  handleRefresh={handleRefresh}
-                  eachSession= {eachSession}
-                />
-                <button onClick={() => handleShowEditSession(null)} >
-                  cerrar formulario
-                </button>
-              </div>
-            ) : (
-              <div key={eventDetails.responseSession._id}>
-                <h2>Nombre: {eachSession.sessionName}</h2>
-                <p>Descripción: {eachSession.description}</p>
-                <p>Día: {eachSession.day}</p>
-                <p>Fecha: {eachSession.dateSession}</p>
-                <p>Sala: {eachSession.hall}</p>
-                <p>Aforo: {eachSession.capacityHall}</p>
+          <div key={i}>
+            <h3>Sesiones Día: {i + 1}</h3>
+            {eachDay.map((eachSession, i) => {
+              return (
+                <div key={eachSession._id}>
+                  {isEditSessionShowing == eachSession._id.toString() ? (
+                    <div>
+                      <EditSession
+                        sessionId={eachSession._id}
+                        eventId={params.eventId}
+                        setIsEditSessionhowing={setIsEditSessionhowing}
+                        handleRefresh={handleRefresh}
+                        eachSession={eachSession}
+                      />
+                      <button onClick={() => handleShowEditSession(null)}>
+                        cerrar formulario
+                      </button>
+                    </div>
+                  ) : (
+                    <div key={eventDetails.responseSession._id}>
+                      <h2>Nombre: {eachSession.sessionName}</h2>
+                      <p>Descripción: {eachSession.description}</p>
+                      <p>Día: {eachSession.day}</p>
+                      <p>Fecha: {eachSession.dateSession}</p>
+                      <p>Sala: {eachSession.hall}</p>
+                      <p>Aforo: {eachSession.capacityHall}</p>
 
-                {eachSession.isAvailable && (
-                  <Link
-                    to={`/events/${params.eventId}/${eachSession._id}/${activeUserId}`}
-                  >
-                    <button>Reservar sesión</button>
-                  </Link>
-                )}
-                {eachSession.hostedBy ? (
-                  <button onClick={() => handleJoinSession(eachSession._id)}>
-                    Apuntate a la sesión
-                  </button>
-                ) : null}
+                      {eachSession.isAvailable && (
+                        <Link
+                          to={`/events/${params.eventId}/${eachSession._id}/${activeUserId}`}
+                        >
+                          <button>Reservar sesión</button>
+                        </Link>
+                      )}
+                      {eachSession.hostedBy ? (
+                        <button
+                          onClick={() => handleJoinSession(eachSession._id)}
+                        >
+                          Apuntate a la sesión
+                        </button>
+                      ) : null}
 
-                <button onClick={() => handleShowEditSession(eachSession._id.toString())}>Editar sesión</button>
-                <button onClick={() => handleSessionDelete(eachSession._id)}>
-                  Borrar sesión
-                </button>
-              </div>
-            )}
+                      <button
+                        onClick={() =>
+                          handleShowEditSession(eachSession._id.toString())
+                        }
+                      >
+                        Editar sesión
+                      </button>
+                      <button
+                        onClick={() => handleSessionDelete(eachSession._id)}
+                      >
+                        Borrar sesión
+                      </button>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
         );
       })}
-      <div></div>
-
       <button onClick={handleShowForm}>Crear sesión</button>
 
       {isFormShowing ? (
