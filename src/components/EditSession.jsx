@@ -5,21 +5,25 @@ import service from "../services/service.config";
 
 
 export default function EditSession(props) {
-const { sessionId, eventId, setIsEditSessionhowing, handleRefresh } = props
+const { sessionId, eventId, setIsEditSessionhowing, handleRefresh, eachSession } = props
  console.log(props)
 
     const [editSession, setEditSession] = useState({
-        sessionName: "",
-        description: "",
-        day: 0,
-        dateSession: "",
-        startHour: "",
-        endHour: "",
-        isAvailable: "false",
-        hall: "",
+        sessionName: eachSession.sessionName,
+        description: eachSession.description,
+        day: eachSession.day,
+        dateSession: eachSession.dateSession,
+        startHour: eachSession.startHour,
+        endHour: eachSession.endHour,
+        isAvailable: eachSession.isAvailable,
+        hall: eachSession.hall,
+        assistants: eachSession.assistants
        
       });
       const [errorMessage, setErrorMessage] = useState("");
+      
+ 
+     
 
 
       const handleEditSession = async (e) => {

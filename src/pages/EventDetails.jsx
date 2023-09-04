@@ -59,12 +59,19 @@ export default function EventDetails() {
     getData();
   };
 
-  const handleShowEditSession = () => {
-    if (isEditSessionShowing === true) {
-      setIsEditSessionhowing(false);
-    } else {
-      setIsEditSessionhowing(true);
-    }
+  const handleShowEditSession = (sessionIdEditing) => {
+
+    setIsEditSessionhowing(sessionIdEditing)
+
+    console.log(sessionIdEditing)
+    // if (isEditSessionShowing === eachSession._id) {
+    //   setIsEditSessionhowing(eachSession._id);
+    // } else {
+    //   setIsEditSessionhowing(true);
+    // }
+
+
+
   };
   const handleJoinSession = async (sessionId) => {
     try {
@@ -106,18 +113,19 @@ export default function EventDetails() {
       {eventDetails.responseSession.map((eachSession, i) => {
         return (
           <div key={eachSession._id}>
-            {console.log(eachSession)}
+            {/* {console.log(eachSession)} */}
             {/* {setIsEditSessionhowing({...isEditSessionShowing, ["i"+eachSession._id] : false})}
             {console.log(isEditSessionShowing)} */}
-            {isEditSessionShowing ? (
+            {isEditSessionShowing == eachSession._id.toString() ? (
               <div>
                 <EditSession
                   sessionId={eachSession._id}
                   eventId={params.eventId}
                   setIsEditSessionhowing={setIsEditSessionhowing}
                   handleRefresh={handleRefresh}
+                  eachSession= {eachSession}
                 />
-                <button onClick={handleShowEditSession}>
+                <button onClick={() => handleShowEditSession(null)} >
                   cerrar formulario
                 </button>
               </div>
@@ -143,7 +151,7 @@ export default function EventDetails() {
                   </button>
                 ) : null}
 
-                <button onClick={handleShowEditSession}>Editar sesión</button>
+                <button onClick={() => handleShowEditSession(eachSession._id.toString())}>Editar sesión</button>
                 <button onClick={() => handleSessionDelete(eachSession._id)}>
                   Borrar sesión
                 </button>
