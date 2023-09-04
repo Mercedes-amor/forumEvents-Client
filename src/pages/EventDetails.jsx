@@ -15,10 +15,7 @@ export default function EventDetails() {
   const [eventDetails, setEventDetails] = useState(null);
   const [isFormShowing, setIsFormShowing] = useState(false);
   const [isEditSessionShowing, setIsEditSessionhowing] = useState();
-  const [editSession, setEditSession] = useState({
-    idAsistant: activeUserId,
-    assistants: null
-  });
+ 
   // console.log(isEditSessionShowing)
   // const [isLoading, setIsLoading] = useState(true)
 
@@ -70,19 +67,17 @@ export default function EventDetails() {
     //   setIsEditSessionhowing(true);
     // }
   };
-  const handleJoinSession = async (sessionId, assistantsArray) => {
-    console.log("assistants",assistantsArray )
-    let editSession={
-      idAsistant: activeUserId,
-      assistants: assistantsArray
-    }
-    console.log("editSession", editSession)
-   
+  const handleJoinSession = async (sessionId, assistants, capacityHall) => {
+ 
  try {
-      await service.put(`/events/${params.eventId}/sessions/${sessionId}`, {
-        editSession,
-      });
-    } catch (error) {}
+      await service.put(`/events/${params.eventId}/sessions/${sessionId}/join`, {
+        assistants,capacityHall
+      })
+      handleRefresh();
+    } catch (error) {
+      console.log(error);
+    }
+ 
   }
   
   
@@ -144,7 +139,7 @@ export default function EventDetails() {
                       <p>Día: {eachSession.day}</p>
                       <p>Fecha: {eachSession.dateSession}</p>
                       <p>Sala: {eachSession.hall}</p>
-                      <p>Aforo: {eachSession.capacityHall}</p>
+                      <p>plazas disponibles: {eachSession.capacityHall- eachSession.assistants.length}</p>
 
                       {eachSession.isAvailable && (
                         <Link
@@ -155,7 +150,7 @@ export default function EventDetails() {
                       )}
                       {eachSession.hostedBy ? (
                         <button
-                          onClick={() => handleJoinSession(eachSession._id, eachSession.assistants)}
+                          onClick={() => handleJoinSession(eachSession._id, eachSession.assistants, eachSession.capacityHall)}
                         >
                           Apuntate a la sesión
                         </button>

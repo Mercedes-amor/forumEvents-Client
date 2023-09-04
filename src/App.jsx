@@ -21,11 +21,11 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/events" element={<EventsList />} />
-        <Route path="/events/create-event" element={<CreateEvent />} />
-        <Route path="/events/:eventId/details" element={<EventDetails />} />
+        <Route path="/events" element={<IsPrivate><EventsList /></IsPrivate>} />
+        <Route path="/events/create-event" element={<IsPrivate><CreateEvent /></IsPrivate>} />
+        <Route path="/events/:eventId/details" element={<IsPrivate><EventDetails /></IsPrivate>} />
         <Route path="/events/:eventId" element={<EditEvent />}/>
-        <Route path="/events/:eventId/:sessionId/:activeUserId" element={<BookSession />} />
+        <Route path="/events/:eventId/:sessionId/:activeUserId" element={<IsPrivate><BookSession /></IsPrivate>} />
         <Route
           path="/:userId"
           element={
