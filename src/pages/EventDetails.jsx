@@ -15,7 +15,7 @@ export default function EventDetails() {
   const [eventDetails, setEventDetails] = useState(null);
   const [isFormShowing, setIsFormShowing] = useState(false);
   const [isEditSessionShowing, setIsEditSessionhowing] = useState();
- 
+
   // console.log(isEditSessionShowing)
   // const [isLoading, setIsLoading] = useState(true)
 
@@ -54,6 +54,7 @@ export default function EventDetails() {
 
   const handleRefresh = () => {
     // setIsLoading(true)
+    console.log("Se ejecuta?");
     getData();
   };
 
@@ -68,19 +69,19 @@ export default function EventDetails() {
     // }
   };
   const handleJoinSession = async (sessionId, assistants, capacityHall) => {
- 
- try {
-      await service.put(`/events/${params.eventId}/sessions/${sessionId}/join`, {
-        assistants,capacityHall
-      })
+    try {
+      await service.put(
+        `/events/${params.eventId}/sessions/${sessionId}/join`,
+        {
+          assistants,
+          capacityHall,
+        }
+      );
       handleRefresh();
     } catch (error) {
       console.log(error);
     }
- 
-  }
-  
-  
+  };
 
   const handleSessionDelete = async (sessionId) => {
     try {
@@ -97,19 +98,26 @@ export default function EventDetails() {
   return (
     <div key={eventDetails.responseEvent._id}>
       <div>
-        <img src={eventDetails.responseEvent.imgEvent} alt="Imagen Evento" width={300} />
+        <img
+          src={eventDetails.responseEvent.imgEvent}
+          alt="Imagen Evento"
+          width={300}
+        />
         <h3>{eventDetails.responseEvent.eventName}</h3>
         <p>{eventDetails.responseEvent.sector}</p>
         <p>
           {eventDetails.responseEvent.startDate.slice(0, 10)} -{" "}
           {eventDetails.responseEvent.endDate.slice(0, 10)}
         </p>
-
-        <Link to={`/events/${params.eventId}`}>
-          {" "}
-          <button>Modificar</button>{" "}
-        </Link>
-        <button onClick={handleEventDelete}>Eliminar</button>
+        {userRole === "admin" ? (
+          <div>
+            <Link to={`/events/${params.eventId}`}>
+              {" "}
+              <button>Modificar</button>{" "}
+            </Link>
+            <button onClick={handleEventDelete}>Eliminar</button>
+          </div>
+        ) : null}
       </div>
       {eventDetails.sessionsArray.map((eachDay, i) => {
         console.log("eachDay", eachDay);
@@ -139,7 +147,11 @@ export default function EventDetails() {
                       <p>Día: {eachSession.day}</p>
                       <p>Fecha: {eachSession.dateSession}</p>
                       <p>Sala: {eachSession.hall}</p>
-                      <p>plazas disponibles: {eachSession.capacityHall- eachSession.assistants.length}</p>
+                      <p>
+                        plazas disponibles:{" "}
+                        {eachSession.capacityHall -
+                          eachSession.assistants.length}
+                      </p>
 
                       {eachSession.isAvailable && (
                         <Link
@@ -150,24 +162,34 @@ export default function EventDetails() {
                       )}
                       {eachSession.hostedBy ? (
                         <button
-                          onClick={() => handleJoinSession(eachSession._id, eachSession.assistants, eachSession.capacityHall)}
+                          onClick={() =>
+                            handleJoinSession(
+                              eachSession._id,
+                              eachSession.assistants,
+                              eachSession.capacityHall
+                            )
+                          }
                         >
                           Apuntate a la sesión
                         </button>
                       ) : null}
 
-                      <button
-                        onClick={() =>
-                          handleShowEditSession(eachSession._id.toString())
-                        }
-                      >
-                        Editar sesión
-                      </button>
-                      <button
-                        onClick={() => handleSessionDelete(eachSession._id)}
-                      >
-                        Borrar sesión
-                      </button>
+                      {userRole === "admin" ? (
+                        <div>
+                          <button
+                            onClick={() =>
+                              handleShowEditSession(eachSession._id.toString())
+                            }
+                          >
+                            Editar sesión
+                          </button>
+                          <button
+                            onClick={() => handleSessionDelete(eachSession._id)}
+                          >
+                            Borrar sesión
+                          </button>
+                        </div>
+                      ) : null}
                     </div>
                   )}
                 </div>
