@@ -17,6 +17,7 @@ export default function EventDetails() {
   const [isEditSessionShowing, setIsEditSessionhowing] = useState();
   const [editSession, setEditSession] = useState({
     idAsistant: activeUserId,
+    assistants: null
   });
   // console.log(isEditSessionShowing)
   // const [isLoading, setIsLoading] = useState(true)
@@ -69,13 +70,22 @@ export default function EventDetails() {
     //   setIsEditSessionhowing(true);
     // }
   };
-  const handleJoinSession = async (sessionId) => {
-    try {
+  const handleJoinSession = async (sessionId, assistantsArray) => {
+    console.log("assistants",assistantsArray )
+    let editSession={
+      idAsistant: activeUserId,
+      assistants: assistantsArray
+    }
+    console.log("editSession", editSession)
+   
+ try {
       await service.put(`/events/${params.eventId}/sessions/${sessionId}`, {
         editSession,
       });
     } catch (error) {}
-  };
+  }
+  
+  
 
   const handleSessionDelete = async (sessionId) => {
     try {
@@ -92,7 +102,7 @@ export default function EventDetails() {
   return (
     <div key={eventDetails.responseEvent._id}>
       <div>
-        <img src={eventDetails.responseEvent.imgEvent} alt="Imagen Evento" />
+        <img src={eventDetails.responseEvent.imgEvent} alt="Imagen Evento" width={300} />
         <h3>{eventDetails.responseEvent.eventName}</h3>
         <p>{eventDetails.responseEvent.sector}</p>
         <p>
@@ -145,7 +155,7 @@ export default function EventDetails() {
                       )}
                       {eachSession.hostedBy ? (
                         <button
-                          onClick={() => handleJoinSession(eachSession._id)}
+                          onClick={() => handleJoinSession(eachSession._id, eachSession.assistants)}
                         >
                           Apuntate a la sesión
                         </button>

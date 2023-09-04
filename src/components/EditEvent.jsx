@@ -16,7 +16,7 @@ export default function EditEvent() {
   const getData = async () => {
     try {
       const response = await service.get(`/events/${params.eventId}`);
-console.log("prueba response",response.data)
+      console.log("prueba response",response.data)
       setEditEvent(response.data.responseEvent);
       
     } catch (error) {
