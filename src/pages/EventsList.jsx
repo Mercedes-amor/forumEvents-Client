@@ -26,12 +26,14 @@ export default function EventsList() {
     }
   };
 
-  const handleInscription = async (eventId, eventCapacity) => {
+  const handleInscription = async (eventId) => {
     try{
-      await service.put(`/events/${eventId}/inscription`, {
-        eventCapacity,
+      console.log(eventsUserArr)
+     await service.put(`/events/${eventId}/inscription`, {
+    
         eventsUserArr
       })
+ 
       handleRefresh()
     } catch(error) {
       console.log(error)

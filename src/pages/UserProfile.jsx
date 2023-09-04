@@ -30,10 +30,17 @@ getData()
 }
 
   const handleInscription = async (eventId) => {
+
+    let eventsUserArr = []
+    userDetails.eventsAsistance.forEach((event)=> {
+      eventsUserArr.push(event._id) 
+    })
+
+    console.log(eventsUserArr)
     try{
       await service.put(`/events/${eventId}/inscription`, {
         
-        eventsUserArr:userDetails.eventsAsistance
+        eventsUserArr
       })
       handleRefresh()
     } catch(error) {
