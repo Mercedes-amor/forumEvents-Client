@@ -225,7 +225,7 @@ export default function EventDetails() {
                         </Link>
                       )}
 
-                      {eachSession.hostedBy !== activeUserId ? (
+                      {eachSession.hostedBy && eachSession.hostedBy !== activeUserId ? 
                         <button
                           onClick={() =>
                             handleJoinSession(
@@ -241,8 +241,10 @@ export default function EventDetails() {
                             <p>Apuntate a la sesión</p>
                           )}
                         </button>
-                      ) : (
-                        <p>Eres el host actual de esta sesión</p>
+                       : (
+                        <p>
+                          {eachSession.hostedBy === activeUserId ? "Eres el host actual de esta sesión" : null}
+                        </p>
                       )}
 
                       {userRole === "admin" ? (
