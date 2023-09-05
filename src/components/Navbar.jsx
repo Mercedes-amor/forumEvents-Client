@@ -1,11 +1,20 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
-
+import service from "../services/service.config";
 import { useContext } from "react";
 import { AuthContext } from "../context/auth.context";
 
 export default function Navbar() {
   const { activeUserId, userRole } = useContext(AuthContext);
   const params = useParams();
+
+  const handleLogout = async () => {
+    try {
+      await service.post(`/auth/logout`);
+      navigate(`/`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div>
       <nav>
@@ -27,14 +36,14 @@ export default function Navbar() {
 
         {activeUserId ? (
           <>
-            <Link to="/userId">
+            <Link to="/userProfile">
               <button>Perfil</button>
             </Link>
             <Link to="/events">
               <button>Eventos</button>
             </Link>
 
-            <Link to="/logout"><button>Logout</button></Link>
+            <button onClick={handleLogout}>Logout</button>
           </>
         ) : null}
 
