@@ -47,7 +47,8 @@ const PaymentSuccess = () => {
   return (
     <div>
       <div>
-        <h1>Thank you for your order!</h1>
+        <h1>Gracias por tu compra</h1>
+        <p>En breve recibirá un correo de confirmación a su email con las entradas</p>
         <Link to={"/"}>Go back to Home</Link>
       </div>
     </div>

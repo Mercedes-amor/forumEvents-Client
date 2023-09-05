@@ -138,6 +138,10 @@ export default function EventDetails() {
           {eventDetails.responseEvent.startDate.slice(0, 10)} -{" "}
           {eventDetails.responseEvent.endDate.slice(0, 10)}
         </p>
+        {eventDetails.responseEvent.price > 0 ? (
+          <p>Precio: {eventDetails.responseEvent.price / 100}€</p>
+        ) : null}
+
         <p>
           Plazas disponibles:{" "}
           {eventDetails.responseEvent.capacity - usersArrayInEvent.length}
@@ -151,27 +155,33 @@ export default function EventDetails() {
             <button onClick={handleEventDelete}>Eliminar</button>
           </div>
         ) : null}
-        <div>
-          {showPaymentIntent === false ? (
-            <button onClick={() => setShowPaymentIntent(true)}>Purchase</button>
-          ) : (
-            <PaymentIntent productDetails={eventDetails.responseEvent} />
-          )}
-        </div>
-        <button
-          onClick={() =>
-            handleInscription(
-              eventDetails.responseEvent._id,
-              eventDetails.responseEvent.capacity
-            )
-          }
-        >
-          {usersArrayInEvent.includes(activeUserId) ? (
-            <p>Date de baja del evento</p>
-          ) : (
-            <p>Apuntate al evento</p>
-          )}
-        </button>
+
+        {eventDetails.responseEvent.itsFree ? (
+          <button
+            onClick={() =>
+              handleInscription(
+                eventDetails.responseEvent._id,
+                eventDetails.responseEvent.capacity
+              )
+            }
+          >
+            {usersArrayInEvent.includes(activeUserId) ? (
+              <p>Date de baja del evento</p>
+            ) : (
+              <p>Apuntate al evento</p>
+            )}
+          </button>
+        ) : (
+          <div>
+            {showPaymentIntent === false ? (
+              <button onClick={() => setShowPaymentIntent(true)}>
+                Purchase
+              </button>
+            ) : (
+              <PaymentIntent productDetails={eventDetails.responseEvent} />
+            )}
+          </div>
+        )}
       </div>
       {eventDetails.sessionsArray.map((eachDay, i) => {
         console.log("eachDay", eachDay);

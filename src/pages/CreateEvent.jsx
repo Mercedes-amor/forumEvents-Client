@@ -45,6 +45,7 @@ export default function CreateEvent() {
     startDate: "",
     endDate: "",
     itsFree: true,
+    price:0,
     capacity: 0,
     sector: "Otro",
     description: "",
@@ -59,6 +60,7 @@ export default function CreateEvent() {
         startDate: newEvent.startDate,
         endDate: newEvent.endDate,
         itsFree: newEvent.itsFree,
+        price:newEvent.price,
         capacity: newEvent.capacity,
         sector: newEvent.sector,
         description: newEvent.description,
@@ -118,6 +120,15 @@ export default function CreateEvent() {
         <option value="true">si</option>
         <option value="false">No</option>
       </select>
+
+      <label htmlFor="price">Precio:</label>
+      <input
+        type="Number"
+        name="price"
+        onChange={handleFormChange}
+        value={newEvent.price}
+      />
+
       <br />
       <label htmlFor="capacity">Capacidad</label>
       <input

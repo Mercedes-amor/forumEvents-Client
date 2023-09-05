@@ -19,7 +19,7 @@ export default function EventsList() {
       setAllEventsList(response.data.eventData);
       console.log(allEventsList)
       // setEventsUserArr(response.data.userData.eventsAsistance)
-      console.log(response.data.userData.eventsAsistance)
+      // console.log(response.data.userData.eventsAsistance)
     } catch (error) {
       console.log(error);
       // Navigate("/error")

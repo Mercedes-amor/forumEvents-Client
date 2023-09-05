@@ -58,6 +58,7 @@ export default function EditEvent() {
     try {
       await service.put(`/events/${params.eventId}`, {
         editEvent,
+
       });
 
       navigate(`/events/${params.eventId}/details`);
