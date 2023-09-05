@@ -10,7 +10,6 @@ import EventsList from "./pages/EventsList"
 import CreateEvent from "./pages/CreateEvent";
 import EventDetails from "./pages/EventDetails";
 import EditEvent from "./components/EditEvent";
-import Logout from "./components/Logout";
 import BookSession from "./pages/BookSession"
 import DeletedUser from "./pages/DeletedUser";
 
