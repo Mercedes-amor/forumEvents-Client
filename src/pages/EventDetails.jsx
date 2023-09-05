@@ -15,6 +15,8 @@ export default function EventDetails() {
   const [eventDetails, setEventDetails] = useState(null);
   const [isFormShowing, setIsFormShowing] = useState(false);
   const [isEditSessionShowing, setIsEditSessionhowing] = useState();
+  const [eventsUserArr, setEventsUserArr] = useState(null)
+  const [usersArrayInEvent, setusersArrayInEvent] =useState(null)
 
   // console.log(isEditSessionShowing)
   // const [isLoading, setIsLoading] = useState(true)
@@ -26,8 +28,9 @@ export default function EventDetails() {
   const getData = async () => {
     try {
       console.log("params", params);
-
       const response = await service.get(`/events/${params.eventId}`);
+      setEventsUserArr(response.data.userData.eventsAsistance)
+      setusersArrayInEvent(response.data.usersArrayInEvent)
       console.log("response", response);
       setEventDetails(response.data);
     } catch (error) {
@@ -91,6 +94,26 @@ export default function EventDetails() {
       console.log(error);
     }
   };
+
+    const handleInscription = async () => {
+    try{
+      console.log(eventsUserArr)
+     await service.put(`/events/${eventDetails.responseEvent._id}/inscription`, {
+    
+        eventsUserArr
+      })
+ 
+      handleRefresh()
+    } catch(error) {
+      console.log(error)
+      if (error.response && error.response.status === 400) {
+        setErrorMessage(error.response.data.errorMessage);
+      }
+    }
+
+    
+
+  }
   if (eventDetails === null) {
     return <h3>...cargando</h3>;
   }
@@ -109,6 +132,7 @@ export default function EventDetails() {
           {eventDetails.responseEvent.startDate.slice(0, 10)} -{" "}
           {eventDetails.responseEvent.endDate.slice(0, 10)}
         </p>
+        <p>Plazas disponibles: {eventDetails.responseEvent.capacity - usersArrayInEvent.length}</p>
         {userRole === "admin" ? (
           <div>
             <Link to={`/events/${params.eventId}`}>
@@ -118,6 +142,8 @@ export default function EventDetails() {
             <button onClick={handleEventDelete}>Eliminar</button>
           </div>
         ) : null}
+
+          <button onClick={() => handleInscription(eventDetails.responseEvent._id, eventDetails.responseEvent.capacity)}>Inscribirse/ Cancelar inscripción</button>
       </div>
       {eventDetails.sessionsArray.map((eachDay, i) => {
         console.log("eachDay", eachDay);

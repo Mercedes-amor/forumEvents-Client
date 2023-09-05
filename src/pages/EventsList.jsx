@@ -4,7 +4,7 @@ import service from "../services/service.config";
 
 export default function EventsList() {
   const [allEventsList, setAllEventsList] = useState(null);
-  const [eventsUserArr, setEventsUserArr] = useState(null)
+
   const [errorMessage, setErrorMessage] = useState("");
 
 
@@ -18,7 +18,7 @@ export default function EventsList() {
       console.log(response);
       setAllEventsList(response.data.eventData);
       console.log(allEventsList)
-      setEventsUserArr(response.data.userData.eventsAsistance)
+      // setEventsUserArr(response.data.userData.eventsAsistance)
       console.log(response.data.userData.eventsAsistance)
     } catch (error) {
       console.log(error);
@@ -26,25 +26,25 @@ export default function EventsList() {
     }
   };
 
-  const handleInscription = async (eventId) => {
-    try{
-      console.log(eventsUserArr)
-     await service.put(`/events/${eventId}/inscription`, {
+  // const handleInscription = async (eventId) => {
+  //   try{
+  //     console.log(eventsUserArr)
+  //    await service.put(`/events/${eventId}/inscription`, {
     
-        eventsUserArr
-      })
+  //       eventsUserArr
+  //     })
  
-      handleRefresh()
-    } catch(error) {
-      console.log(error)
-      if (error.response && error.response.status === 400) {
-        setErrorMessage(error.response.data.errorMessage);
-      }
-    }
+  //     handleRefresh()
+  //   } catch(error) {
+  //     console.log(error)
+  //     if (error.response && error.response.status === 400) {
+  //       setErrorMessage(error.response.data.errorMessage);
+  //     }
+  //   }
 
     
 
-  }
+  // }
 
   const handleRefresh = () =>{
     getData()
@@ -67,7 +67,7 @@ export default function EventsList() {
             </p>
 
             <Link to={`/events/${eachEvent._id}/details`}>Detalles</Link>
-            <button onClick={() => handleInscription(eachEvent._id, eachEvent.capacity)}>Inscribirse/ Cancelar inscripción</button>
+            {/* <button onClick={() => handleInscription(eachEvent._id, eachEvent.capacity)}>Inscribirse/ Cancelar inscripción</button> */}
             
             {errorMessage ? <p>{errorMessage}</p> : null}
           </div>
