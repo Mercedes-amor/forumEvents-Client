@@ -1,22 +1,37 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import service from "../services/service.config";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AuthContext } from "../context/auth.context";
 
 export default function Navbar() {
   const { activeUserId, userRole } = useContext(AuthContext);
   const params = useParams();
+  const { verifyToken } = useContext(AuthContext);
 
-  const handleLogout = async () => {
+
+  const handlelogout = async (e) => {
+
+    e.preventDefault();
+
     try {
-      await service.post(`/auth/logout`);
-      navigate(`/`);
+ 
+      localStorage.clear();
+
+      await verifyToken();
+      navigate("/");
+
     } catch (error) {
       console.log(error);
+
     }
   };
+
+
+  
+
   return (
     <div>
+      
       <nav>
         <Link to="/">
           <button>Home</button>
@@ -42,8 +57,9 @@ export default function Navbar() {
             <Link to="/events">
               <button>Eventos</button>
             </Link>
+           
+            <button onClick={handlelogout}>Logout</button>
 
-            <button onClick={handleLogout}>Logout</button>
           </>
         ) : null}
 

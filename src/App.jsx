@@ -22,7 +22,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-      
+
         <Route path="/deletedUser" element={<DeletedUser />} />
         <Route path="/events" element={<IsPrivate><EventsList /></IsPrivate>} />
         <Route path="/events/create-event" element={<IsPrivate><CreateEvent /></IsPrivate>} />
