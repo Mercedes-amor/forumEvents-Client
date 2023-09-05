@@ -6,9 +6,11 @@ import EditSession from "../components/EditSession";
 import { AuthContext } from "../context/auth.context";
 import { useContext } from "react";
 
+import PaymentIntent from "../components/PaymentIntent";
+
 export default function EventDetails() {
   const { activeUserId, userRole } = useContext(AuthContext);
-  console.log("role", userRole);
+  console.log("userId", activeUserId);
   const params = useParams();
 
   const navigate = useNavigate();
@@ -17,7 +19,8 @@ export default function EventDetails() {
   const [isEditSessionShowing, setIsEditSessionhowing] = useState();
   const [eventsUserArr, setEventsUserArr] = useState(null);
   const [usersArrayInEvent, setusersArrayInEvent] = useState(null);
-
+  const [showPaymentIntent, setShowPaymentIntent] = useState(false);
+  console.log("usersArrayInEvent", usersArrayInEvent);
   // console.log(isEditSessionShowing)
   // const [isLoading, setIsLoading] = useState(true)
 
@@ -30,7 +33,11 @@ export default function EventDetails() {
       console.log("params", params);
       const response = await service.get(`/events/${params.eventId}`);
       setEventsUserArr(response.data.userData.eventsAsistance);
-      setusersArrayInEvent(response.data.usersArrayInEvent);
+      let userArr = [];
+      response.data.usersArrayInEvent.forEach((e) => {
+        userArr.push(e._id);
+      });
+      setusersArrayInEvent(userArr);
       console.log("response", response);
       setEventDetails(response.data);
     } catch (error) {
@@ -144,7 +151,13 @@ export default function EventDetails() {
             <button onClick={handleEventDelete}>Eliminar</button>
           </div>
         ) : null}
-
+        <div>
+          {showPaymentIntent === false ? (
+            <button onClick={() => setShowPaymentIntent(true)}>Purchase</button>
+          ) : (
+            <PaymentIntent productDetails={eventDetails.responseEvent} />
+          )}
+        </div>
         <button
           onClick={() =>
             handleInscription(
@@ -153,7 +166,11 @@ export default function EventDetails() {
             )
           }
         >
-          Inscribirse/ Cancelar inscripción
+          {usersArrayInEvent.includes(activeUserId) ? (
+            <p>Date de baja del evento</p>
+          ) : (
+            <p>Apuntate al evento</p>
+          )}
         </button>
       </div>
       {eventDetails.sessionsArray.map((eachDay, i) => {
@@ -197,7 +214,8 @@ export default function EventDetails() {
                           <button>Reservar sesión</button>
                         </Link>
                       )}
-                      {eachSession.hostedBy ? (
+
+                      {eachSession.hostedBy !== activeUserId ? (
                         <button
                           onClick={() =>
                             handleJoinSession(
@@ -207,9 +225,15 @@ export default function EventDetails() {
                             )
                           }
                         >
-                          Apuntate a la sesión
+                          {eachSession.assistants.includes(activeUserId) ? (
+                            <p>Date de baja de la sesión</p>
+                          ) : (
+                            <p>Apuntate a la sesión</p>
+                          )}
                         </button>
-                      ) : null}
+                      ) : (
+                        <p>Eres el host actual de esta sesión</p>
+                      )}
 
                       {userRole === "admin" ? (
                         <div>
