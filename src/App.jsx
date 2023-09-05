@@ -12,6 +12,7 @@ import EventDetails from "./pages/EventDetails";
 import EditEvent from "./components/EditEvent";
 import BookSession from "./pages/BookSession"
 import DeletedUser from "./pages/DeletedUser";
+import PaymentSuccess from "./components/PaymentSuccess";
 
 function App() {
   return (
@@ -30,6 +31,8 @@ function App() {
         <Route path="/events/:eventId" element={<EditEvent />}/>
         <Route path="/events/:eventId/:sessionId/:activeUserId" element={<IsPrivate><BookSession /></IsPrivate>} />
         <Route path="/userProfile"  element={<IsPrivate><UserProfile /></IsPrivate>}/>
+
+        <Route path="/payment-success" element={ <PaymentSuccess/> }/>
         
      </Routes>
     </>
