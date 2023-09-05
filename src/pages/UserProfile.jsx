@@ -1,20 +1,23 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import service from "../services/service.config";
 
 export default function UserProfile() {
-  const params = useParams();
+
+  const navigate = useNavigate();
+
+ 
   const [userDetails, setUserDetails] = useState(null);
 const [showDelete, setShowDelete] = useState(false)
-  console.log("params", params);
+  
   useEffect(() => {
     getData();
   }, []);
 
   const getData = async () => {
     try {
-      const response = await service(`/users/${params.id}`);
+      const response = await service("/users/userProfile");
 
       setUserDetails(response.data);
       console.log("userData", response.data);
@@ -28,11 +31,23 @@ const [showDelete, setShowDelete] = useState(false)
   };
 
 const handleShowDelete = () => {
-   if (showDelete) {
+   if (showDelete === false) {
     setShowDelete(true)
    } else {
     setShowDelete(false)
    }
+}
+
+const handleDeleteUser = async () => {
+try {
+  
+  await service.delete("users/deleteAcount")
+  navigate("/deletedUser")
+
+} catch (error) {
+  
+}
+
 }
 
   const handleInscription = async (eventId) => {
@@ -61,12 +76,12 @@ const handleShowDelete = () => {
   return (
     <div>
       <h1>Hola {userDetails.username}, bienvenido.</h1>
-      <button onClick={handleShowDelete()}>Eliminar cuenta</button>
+      <button onClick={handleShowDelete}>Eliminar cuenta</button>
       {showDelete ? 
       <div>
        <h4>¿Esta seguro de que desea eliminar su cuenta?</h4>
-        <button onClick={handleDeleteUser()}>Si, eliminar cuenta</button>
-        <button onClick={handleShowDelete()}>No, no quiero eliminar mi cuenta</button>
+        <button onClick={handleDeleteUser}>Si, eliminar cuenta</button>
+        <button onClick={handleShowDelete}>No, no quiero eliminar mi cuenta</button>
         </div> : null}
 
       {userDetails.eventsAsistance.length > 0

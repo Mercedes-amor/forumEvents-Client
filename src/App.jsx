@@ -11,6 +11,7 @@ import CreateEvent from "./pages/CreateEvent";
 import EventDetails from "./pages/EventDetails";
 import EditEvent from "./components/EditEvent";
 import BookSession from "./pages/BookSession"
+import DeletedUser from "./pages/DeletedUser";
 
 function App() {
   return (
@@ -21,20 +22,16 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+      
+        <Route path="/deletedUser" element={<DeletedUser />} />
         <Route path="/events" element={<IsPrivate><EventsList /></IsPrivate>} />
         <Route path="/events/create-event" element={<IsPrivate><CreateEvent /></IsPrivate>} />
         <Route path="/events/:eventId/details" element={<IsPrivate><EventDetails /></IsPrivate>} />
         <Route path="/events/:eventId" element={<EditEvent />}/>
         <Route path="/events/:eventId/:sessionId/:activeUserId" element={<IsPrivate><BookSession /></IsPrivate>} />
-        <Route
-          path="/:userId"
-          element={
-            <IsPrivate>
-              <UserProfile />
-            </IsPrivate>
-          }
-        />
-      </Routes>
+        <Route path="/userProfile"  element={<IsPrivate><UserProfile /></IsPrivate>}/>
+        
+     </Routes>
     </>
   );
 }
