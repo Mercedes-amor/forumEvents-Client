@@ -6,7 +6,38 @@ export default function EditEvent() {
   const params = useParams();
 
   const navigate = useNavigate();
+  // CLOUDINARY
+  const [imageUrl, setImageUrl] = useState(null);
+  const [isUploading, setIsUploading] = useState(false); // for a loading animation effect
+  const [errorMessage, setErrorMessage] = useState("");
+  // below function should be the only function invoked when the file type input changes => onChange={handleFileUpload}
+  const handleFileUpload = async (event) => {
+    // console.log("The file to be uploaded is: ", e.target.files[0]);
 
+    if (!event.target.files[0]) {
+      // to prevent accidentally clicking the choose file button and not selecting a file
+      return;
+    }
+
+    setIsUploading(true); // to start the loading animation
+
+    const uploadData = new FormData(); // images and other files need to be sent to the backend in a FormData
+    uploadData.append("imgEvent", event.target.files[0]);
+    //                   |
+    //     this name needs to match the name used in the middleware => uploader.single("image")
+
+    try {
+      const response = await uploadImageService(uploadData);
+      // or below line if not using services
+      // const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/upload`, uploadData)
+
+      setImageUrl(response.data.imageUrl);
+      //                          |
+      //     this is how the backend sends the image to the frontend => res.json({ imageUrl: req.file.path });
+
+      setIsUploading(false); // to stop the loading animation
+    } catch (error) {}
+  };
   const [editEvent, setEditEvent] = useState(null);
 
   useEffect(() => {
@@ -16,9 +47,8 @@ export default function EditEvent() {
   const getData = async () => {
     try {
       const response = await service.get(`/events/${params.eventId}`);
-      console.log("prueba response",response.data)
+      console.log("prueba response", response.data);
       setEditEvent(response.data.responseEvent);
-      
     } catch (error) {
       console.log(error);
     }
@@ -26,7 +56,9 @@ export default function EditEvent() {
   const handleUpdateEvent = async (e) => {
     e.preventDefault();
     try {
-      await service.put(`/events/${params.eventId}`, { editEvent });
+      await service.put(`/events/${params.eventId}`, {
+        editEvent,
+      });
 
       navigate(`/events/${params.eventId}/details`);
     } catch (error) {}
@@ -39,12 +71,12 @@ export default function EditEvent() {
     });
   };
 
-  if(editEvent === null ) {
-    return <h3>...cargando</h3>}
+  if (editEvent === null) {
+    return <h3>...cargando</h3>;
+  }
 
-    console.log("edit event", editEvent)
+  console.log("edit event", editEvent);
   return (
-  
     <form>
       <label htmlFor="eventName">Nombre del evento</label>
       <input
@@ -103,13 +135,14 @@ export default function EditEvent() {
         <option value="ocio">ocio</option>
       </select>
       <br />
-      {/* <label htmlFor="imgEvent">Imagen del evento</label>
+      <label htmlFor="imgEvent">Imagen del evento</label>
       <input
         type="file"
         name="imgEvent"
-        onChange={handleFormChange}
-        value={editEvent.imgEvent}
-      /> */}
+        onChange={handleFileUpload}
+        // value={editEvent.imgEvent}
+        disabled={isUploading}
+      />
       <br />
       <label htmlFor="description">Descripción del evento</label>
       <input
