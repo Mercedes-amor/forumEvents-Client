@@ -10,6 +10,7 @@ import EventsList from "./pages/EventsList"
 import CreateEvent from "./pages/CreateEvent";
 import EventDetails from "./pages/EventDetails";
 import EditEvent from "./components/EditEvent";
+import Logout from "./components/Logout";
 import BookSession from "./pages/BookSession"
 import DeletedUser from "./pages/DeletedUser";
 
@@ -22,7 +23,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-      
+
         <Route path="/deletedUser" element={<DeletedUser />} />
         <Route path="/events" element={<IsPrivate><EventsList /></IsPrivate>} />
         <Route path="/events/create-event" element={<IsPrivate><CreateEvent /></IsPrivate>} />
