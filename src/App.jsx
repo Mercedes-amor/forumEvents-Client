@@ -16,10 +16,7 @@ import PaymentSuccess from "./components/PaymentSuccess";
 
 //Bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-import Collapse from "react-bootstrap/Collapse";
-import Toast from 'react-bootstrap/Toast';
+
 
 
 

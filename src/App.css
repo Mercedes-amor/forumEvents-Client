@@ -5,3 +5,13 @@
   text-align: center;
 }
 
+Form {
+  text-align: left;
+  
+}
+
+.me-auto :hover{
+  background-color: rgba(17, 47, 179, 0.116);
+  border-radius: 10px ;
+}
+
