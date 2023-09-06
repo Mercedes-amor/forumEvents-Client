@@ -2,6 +2,12 @@ import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import service from "../services/service.config";
 
+
+//BOOSTRAP 
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import Form from 'react-bootstrap/Form';
+import { Button } from "react-bootstrap";
+
 export default function CreateSession(props) {
   const paramsEventId = props.params;
   const setIsFormShowing = props.setIsFormShowing
@@ -50,85 +56,102 @@ export default function CreateSession(props) {
   };
 
   return (
-    <form>
-      <label htmlFor="sessionName">Nombre de la sesión</label>
-      <input
+    <Form>
+      <FloatingLabel controlId="floatingInput" label="Nombre de la sesión" className="mb-3">
+      <Form.Control
+      placeholder="Nombre de la sesión"
         type="text"
         name="sessionName"
         onChange={handleFormChange}
         value={newSession.sessionName}
       />
-      <br />
-      <label htmlFor="description">Descripción</label>
-      <input
+      </FloatingLabel>
+      <FloatingLabel controlId="floatingInput" label="Descripción" className="mb-3">
+      
+      <Form.Control
+      placeholder="Descripción"
         type="text"
         name="description"
         onChange={handleFormChange}
         value={newSession.description}
       />
-      <br />
-      <label htmlFor="day">Dia</label>
-      <input
+      </FloatingLabel>
+      <FloatingLabel controlId="floatingInput" label="Dia" className="mb-3">
+  
+      <Form.Control
+      placeholder="Dia"
         type="Number"
         name="day"
         onChange={handleFormChange}
         value={newSession.day}
       />
-      <br />
-      <label htmlFor="dateSession">Fecha</label>
-      <input
+      </FloatingLabel>
+      <FloatingLabel controlId="floatingInput" label="Fecha" className="mb-3">
+      
+      <Form.Control
+      placeholder="Fecha"
         type="date"
         name="dateSession"
         onChange={handleFormChange}
         value={newSession.dateSession}
       />
-      <br />
-      <label htmlFor="startHour">Hora de inicio</label>
-      <input
+      </FloatingLabel>
+      <FloatingLabel controlId="floatingInput" label="Hora de inicio" className="mb-3">
+      
+     
+      <Form.Control
+            placeholder="Hora de inicio"
         type="text"
         name="startHour"
         onChange={handleFormChange}
         value={newSession.startHour}
       />
-      <br />
-      <label htmlFor="endHour">Hora de finalización</label>
-      <input
+      </FloatingLabel>
+      <FloatingLabel controlId="floatingInput" label="Hora de finalización" className="mb-3">
+      
+      <Form.Control
+      placeholder="Hora de finalización"
         type="text"
         name="endHour"
         onChange={handleFormChange}
         value={newSession.endHour}
       />
-      <br />
-      <label htmlFor="hall">Sala</label>
-      <input
+      </FloatingLabel>
+      <FloatingLabel controlId="floatingInput" label="Sala" className="mb-3">
+     
+      <Form.Control
+      placeholder="Sala"
         type="text"
         name="hall"
         onChange={handleFormChange}
         value={newSession.hall}
       />
-      <br />
-      <label htmlFor="capacityHall">Capacidad de la sala</label>
-      <input
+      </FloatingLabel>
+      <FloatingLabel controlId="floatingInput" label="Capacidad de la sala" className="mb-3">
+      
+      <Form.Control
+      placeholder="Capacidad de la sala"
         type="Number"
         name="capacityHall"
         onChange={handleFormChange}
         value={newSession.capacityHall}
       />
-      <br />
+      </FloatingLabel>
+     
       <p>¿Esta disponible?</p>
       <input onChange={handleFormChange} type="radio"  name="isAvailable" value="true" />
       <label htmlFor="isAvailable" >Si</label>
-      <br />
+      
       <input onChange={handleFormChange} type="radio"  name="isAvailable" value="false" />
       <label htmlFor="isAvailable" >No</label>
+     
       <br />
-      <br />
-      <button type="submit" onClick={handleAddSession}>
+      <Button type="submit" variant="info" onClick={handleAddSession}>
         Crear sesión
-      </button>
+      </Button>
 
       {errorMessage ? <p>{errorMessage}</p> : null}
       {/* {successMessage ? <p>{successMessage}</p> : null} */}
-    </form>
+    </Form>
   );
 }

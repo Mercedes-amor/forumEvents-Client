@@ -2,6 +2,14 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import service from "../services/service.config";
 
+
+//BOOSTRAP
+import FloatingLabel from "react-bootstrap/FloatingLabel";
+import Form from "react-bootstrap/Form";
+import { Button } from "react-bootstrap";
+
+
+
 export default function EditEvent() {
   const params = useParams();
 
@@ -46,7 +54,7 @@ export default function EditEvent() {
 
   const getData = async () => {
     try {
-      const response = await service.get(`/events/${params.eventId}`);
+      const response = await service.get(`/events/${params.eventId}/details`);
       console.log("prueba response", response.data);
       setEditEvent(response.data.responseEvent);
     } catch (error) {
@@ -78,32 +86,38 @@ export default function EditEvent() {
 
   console.log("edit event", editEvent);
   return (
-    <form>
-      <label htmlFor="eventName">Nombre del evento</label>
-      <input
+    <Form>
+      <FloatingLabel controlId="floatingInput" label="Nombre del evento" className="mb-3">
+      
+      <Form.Control
+      placeholder="Nombre del evento"
         type="text"
         name="eventName"
         onChange={handleFormChange}
         value={editEvent.eventName}
       />
-      <br />
-      <label htmlFor="startDate">Fecha de inicio</label>
-      <input
+      </FloatingLabel>
+      <FloatingLabel controlId="floatingInput" label="Fecha de inicio" className="mb-3">
+     
+      <Form.Control
+      placeholder="Fecha de inicio"
         type="date"
         name="startDate"
         onChange={handleFormChange}
         value={editEvent.startDate}
       />
 
-      <br />
-      <label htmlFor="endtDate">Fecha de finalización</label>
-      <input
+      </FloatingLabel>
+      <FloatingLabel controlId="floatingInput" label="Fecha de finalización" className="mb-3">
+      
+      <Form.Control
+      placeholder="Fecha de finalización"
         type="date"
         name="endDate"
         onChange={handleFormChange}
         value={editEvent.endDate}
       />
-      <br />
+      </FloatingLabel>
       <label htmlFor="itsFree">¿Es gratuito?</label>
       <select
         name="itsFree"
@@ -114,48 +128,57 @@ export default function EditEvent() {
         <option value="false">No</option>
       </select>
       <br />
-      <label htmlFor="capacity">Capacidad</label>
-      <input
+      <FloatingLabel controlId="floatingInput" label="Capacidad" className="mb-3">
+      
+      <Form.Control
+      placeholder="Capacidad"
         type="Number"
         name="capacity"
         onChange={handleFormChange}
         value={editEvent.capacity}
       />
-      <br />
-      <label htmlFor="sector">Sector</label>
-      <select
+      </FloatingLabel>
+      
+      <Form.Select aria-label="Default select example"
         name="sector"
         onChange={handleFormChange}
         value={editEvent.sector}
-      >
+      > 
+        <option>Seleccionar sector</option>
         <option value="otro">Otro</option>
         <option value="tecnológico">tecnológico</option>
         <option value="medicina">medicina</option>
         <option value="ciencia">ciencia</option>
         <option value="gastronómico">gastronómico</option>
         <option value="ocio">ocio</option>
-      </select>
+      </Form.Select>
       <br />
-      <label htmlFor="imgEvent">Imagen del evento</label>
-      <input
+      <FloatingLabel controlId="floatingInput" label="Imagen del evento" className="mb-3">
+      
+      <Form.Control
+      placeholder="Imagen del evento"
         type="file"
         name="imgEvent"
         onChange={handleFileUpload}
-        // value={editEvent.imgEvent}
+        
         disabled={isUploading}
       />
-      <br />
-      <label htmlFor="description">Descripción del evento</label>
-      <input
+      </FloatingLabel>
+      <FloatingLabel controlId="floatingTextarea2" label="Descripción del evento">
+      
+      <Form.Control
+          as="textarea"
+          placeholder="Descripción del evento"
+          style={{ height: '100px' }}
         type="text"
         name="description"
         onChange={handleFormChange}
         value={editEvent.description}
       />
-      <br />
-      <button type="submit" onClick={handleUpdateEvent}>
+      </FloatingLabel>
+      <Button type="submit" variant="info" onClick={handleUpdateEvent}>
         Guardar cambios
-      </button>
-    </form>
+      </Button>
+    </Form>
   );
 }

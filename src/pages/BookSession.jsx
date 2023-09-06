@@ -2,6 +2,13 @@ import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import service from "../services/service.config";
 
+
+//BOOSTRAP
+import FloatingLabel from "react-bootstrap/FloatingLabel";
+import Form from "react-bootstrap/Form";
+import { Button } from "react-bootstrap";
+
+
 export default function EditSession() {
   const navigate = useNavigate();
   const params = useParams();
@@ -40,30 +47,40 @@ export default function EditSession() {
   };
 
   return (
-    <form>
-      <label htmlFor="sessionName">Nombre de la sesión</label>
-      <input
-        type="text"
-        name="sessionName"
-        onChange={handleFormChange}
-        value={editSession.sessionName}
-      />
-      <br />
-      <label htmlFor="description">Descripción</label>
-      <input
-        type="text"
-        name="description"
-        onChange={handleFormChange}
-        value={editSession.description}
-      />
-      <br />
+    <Form>
+      <FloatingLabel
+        controlId="floatingInput"
+        label="Nombre de la sesión"
+        className="mb-3"
+      >
+        <Form.Control
+          placeholder="Nombre de la sesión"
+          type="text"
+          name="sessionName"
+          onChange={handleFormChange}
+          value={editSession.sessionName}
+        />
+      </FloatingLabel>
+      <FloatingLabel
+        controlId="floatingInput"
+        label="Descripción"
+        className="mb-3"
+      >
+        <Form.Control
+          placeholder="Descripción"
+          type="text"
+          name="description"
+          onChange={handleFormChange}
+          value={editSession.description}
+        />
+      </FloatingLabel>
 
-      <button type="submit" onClick={handleEditSession}>
-        Editar sesión ESTO
-      </button>
+      <Button type="submit" variant="info" onClick={handleEditSession}>
+        Reservar sesión
+      </Button>
 
       {errorMessage ? <p>{errorMessage}</p> : null}
       {/* {successMessage ? <p>{successMessage}</p> : null} */}
-    </form>
+    </Form>
   );
 }

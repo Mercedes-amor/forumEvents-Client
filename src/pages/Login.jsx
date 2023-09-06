@@ -4,6 +4,11 @@ import service from "../services/service.config";
 
 import { AuthContext } from "../context/auth.context";
 
+//BOOSTRAP
+import FloatingLabel from "react-bootstrap/FloatingLabel";
+import Form from "react-bootstrap/Form";
+import { Button } from "react-bootstrap";
+
 function Login() {
   const { verifyToken } = useContext(AuthContext);
 
@@ -33,40 +38,42 @@ function Login() {
     } catch (error) {
       console.log(error);
       if (error.response && error.response.status === 400) {
-        setErrorMessage(error.response.data.errorMessage)
-    }
+        setErrorMessage(error.response.data.errorMessage);
+      }
     }
   };
 
   return (
     <div>
-      <h1>Login</h1>
-
-      <form onSubmit={handleLogin}>
-        <label>Email:</label>
-        <input
-          type="email"
-          name="email"
-          value={email}
-          onChange={handleEmailChange}
-        />
-
+      <Form onSubmit={handleLogin}>
+        <FloatingLabel controlId="floatingInput" label="Email" className="mb-3">
+          <Form.Control
+            placeholder="Email:"
+            type="email"
+            name="email"
+            value={email}
+            onChange={handleEmailChange}
+          />
+        </FloatingLabel>
+        <FloatingLabel
+          controlId="floatingInput"
+          label="Password"
+          className="mb-3"
+        >
+          <Form.Control
+          placeholder="Password"
+            type="password"
+            name="password"
+            value={password}
+            onChange={handlePasswordChange}
+          />
+        </FloatingLabel>
         <br />
 
-        <label>Password:</label>
-        <input
-          type="password"
-          name="password"
-          value={password}
-          onChange={handlePasswordChange}
-        />
-
-        <br />
-
-        <button type="submit">Login</button>
+        <Button type="submit" variant="info">Login</Button>
 
         {errorMessage ? <p>{errorMessage}</p> : null}
-      </form>
+      </Form>
     </div>
   );
 }
