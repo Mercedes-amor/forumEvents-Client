@@ -217,7 +217,7 @@ export default function EventDetails() {
                           eachSession.assistants.length}
                       </p>
 
-                      {eachSession.isAvailable && (
+                      {eventsUserArr.includes(params.eventId)=== true && eachSession.isAvailable && (
                         <Link
                           to={`/events/${params.eventId}/${eachSession._id}/${activeUserId}`}
                         >
@@ -225,7 +225,7 @@ export default function EventDetails() {
                         </Link>
                       )}
 
-                      {eachSession.hostedBy && eachSession.hostedBy !== activeUserId ? 
+                      {eventsUserArr.includes(params.eventId)=== true && eachSession.hostedBy && eachSession.hostedBy !== activeUserId ? 
                         <button
                           onClick={() =>
                             handleJoinSession(

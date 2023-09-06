@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const service = axios.create({
-    baseURL: "http://localhost:5005/api"
+    baseURL: import.meta.env.VITE_SERVER_URL
 })
 
 // configuracion que en todas las llamadas al backend se busque el Token en el navegador y se envie

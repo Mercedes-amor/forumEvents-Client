@@ -1,13 +1,14 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import service from "../services/service.config";
+import { AuthContext } from "../context/auth.context";
 
 export default function UserProfile() {
 
   const navigate = useNavigate();
 
- 
+  const { verifyToken } = useContext(AuthContext);
   const [userDetails, setUserDetails] = useState(null);
 const [showDelete, setShowDelete] = useState(false)
   
@@ -42,6 +43,8 @@ const handleDeleteUser = async () => {
 try {
   
   await service.delete("users/deleteAcount")
+  localStorage.clear();
+  await verifyToken();
   navigate("/deletedUser")
 
 } catch (error) {
