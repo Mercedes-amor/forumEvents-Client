@@ -43,7 +43,8 @@ const handleDeleteUser = async () => {
 try {
   
   await service.delete("users/deleteAcount")
-  localStorage.clear();
+  localStorage.removeItem("authToken");
+
   await verifyToken();
   navigate("/deletedUser")
 

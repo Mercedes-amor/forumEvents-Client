@@ -31,7 +31,8 @@ export default function EventDetails() {
   const getData = async () => {
     try {
       console.log("params", params);
-      const response = await service.get(`/events/${params.eventId}`);
+      const response = await service.get(`/events/${params.eventId}/details`);
+      console.log("este es el response jesus", response);
       setEventsUserArr(response.data.userData.eventsAsistance);
       let userArr = [];
       response.data.usersArrayInEvent.forEach((e) => {
@@ -174,9 +175,11 @@ export default function EventDetails() {
         ) : (
           <div>
             {showPaymentIntent === false ? (
-              <button onClick={() => setShowPaymentIntent(true)}>
-                Purchase
-              </button>
+              !usersArrayInEvent.includes(activeUserId) ? (
+                <button onClick={() => setShowPaymentIntent(true)}>
+                  Purchase
+                </button>
+              ) : <p>Ya has realizado la compra para este evento</p>
             ) : (
               <PaymentIntent productDetails={eventDetails.responseEvent} />
             )}
@@ -217,15 +220,18 @@ export default function EventDetails() {
                           eachSession.assistants.length}
                       </p>
 
-                      {eventsUserArr.includes(params.eventId)=== true && eachSession.isAvailable && (
-                        <Link
-                          to={`/events/${params.eventId}/${eachSession._id}/${activeUserId}`}
-                        >
-                          <button>Reservar sesión</button>
-                        </Link>
-                      )}
+                      {eventsUserArr.includes(params.eventId) === true &&
+                        eachSession.isAvailable && (
+                          <Link
+                            to={`/events/${params.eventId}/${eachSession._id}/${activeUserId}`}
+                          >
+                            <button>Reservar sesión</button>
+                          </Link>
+                        )}
 
-                      {eventsUserArr.includes(params.eventId)=== true && eachSession.hostedBy && eachSession.hostedBy !== activeUserId ? 
+                      {eventsUserArr.includes(params.eventId) === true &&
+                      eachSession.hostedBy &&
+                      eachSession.hostedBy !== activeUserId ? (
                         <button
                           onClick={() =>
                             handleJoinSession(
@@ -241,9 +247,11 @@ export default function EventDetails() {
                             <p>Apuntate a la sesión</p>
                           )}
                         </button>
-                       : (
+                      ) : (
                         <p>
-                          {eachSession.hostedBy === activeUserId ? "Eres el host actual de esta sesión" : null}
+                          {eachSession.hostedBy === activeUserId
+                            ? "Eres el host actual de esta sesión"
+                            : null}
                         </p>
                       )}
 

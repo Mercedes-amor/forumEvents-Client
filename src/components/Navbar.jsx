@@ -15,7 +15,7 @@ export default function Navbar() {
 
     try {
  
-      localStorage.clear();
+      localStorage.removeItem("authToken");
 
       await verifyToken();
       navigate("/");
