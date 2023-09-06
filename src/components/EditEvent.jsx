@@ -119,14 +119,14 @@ export default function EditEvent() {
       />
       </FloatingLabel>
       <label htmlFor="itsFree">¿Es gratuito?</label>
-      <select
+      <Form.Select aria-label="Default select example"
         name="itsFree"
         onChange={handleFormChange}
         value={editEvent.itsFree}
       >
         <option value="true">si</option>
         <option value="false">No</option>
-      </select>
+      </Form.Select>
       <br />
       <FloatingLabel controlId="floatingInput" label="Capacidad" className="mb-3">
       
@@ -138,13 +138,13 @@ export default function EditEvent() {
         value={editEvent.capacity}
       />
       </FloatingLabel>
-      
+      <label htmlFor="sector">Seleccione sector</label>
       <Form.Select aria-label="Default select example"
         name="sector"
         onChange={handleFormChange}
         value={editEvent.sector}
-      > 
-        <option>Seleccionar sector</option>
+       > 
+       
         <option value="otro">Otro</option>
         <option value="tecnológico">tecnológico</option>
         <option value="medicina">medicina</option>

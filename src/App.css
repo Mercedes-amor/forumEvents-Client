@@ -1,17 +1,62 @@
+/* PALETA DE COLORES
+#F7F6F8
+#BAB2A8
+#957F7E
+#7BA7B8
+#3C3B45 */
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  background-color: #F7F6F8;
 }
 
 Form {
   text-align: left;
   
 }
+.me-auto {
+
+  box-shadow: 5px 5px 15px gray;
+  align-items: center;
+  padding: 5px;
+}
 
 .me-auto :hover{
-  background-color: rgba(17, 47, 179, 0.116);
+  
   border-radius: 10px ;
+}
+
+.buttonDetails {
+  margin: 5px;
+}
+
+#button {
+  margin: 5px;
+  background-color: rgb(112, 106, 97);
+}
+
+.button {
+  margin: 5px;
+  background-color: rgb(235, 176, 105);
+}
+
+.dayCard {
+  padding: 30px;
+  background: #38937C;
+  box-shadow: 5px 5px 15px gray;
+  margin: 15px;
+}
+.cardSession {
+  background:#ffffff;
+ 
+}
+
+.containerDay {
+  border: none;
+  background-color: #F7F6F8 ;
+
 }
 

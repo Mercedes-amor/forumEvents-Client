@@ -2,6 +2,12 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import service from "../services/service.config";
 
+//Bootstrap
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
+import FloatingLabel from "react-bootstrap/FloatingLabel";
+import Form from "react-bootstrap/Form";
+
 export default function EventsList() {
   const [allEventsList, setAllEventsList] = useState(null);
   const [filteredEvents, setFilteredEvents] = useState("");
@@ -50,20 +56,22 @@ export default function EventsList() {
   return (
     <>
       <div>
-        <form>
-          <label htmlFor="query">filtra eventos por categoria</label>
+        <Form>
+        <label htmlFor="sector">Filtre por sector</label>
+          <Form.Select
+            aria-label="Default select example"
+            onChange={handleSearch}
+            name="select"
+          >
 
-          <select onChange={handleSearch} name="select">
-            <option value="todos" selected>
-              todos
-            </option>
+            <option value="todos">todos</option>
             <option value="Otro">Otro</option>
             <option value="tecnológico">tecnológico</option>
             <option value="medicina">medicina</option>
             <option value="ciencia">ciencia</option>
             <option value="gastronómico">gastronómico</option>
             <option value="ocio">ocio</option>
-          </select>
+          </Form.Select>
 
           {/* <label htmlFor="startDate">Fecha de Inicio</label>
           <input
@@ -79,27 +87,36 @@ export default function EventsList() {
             onChange={handleSearch}
             value={endDate}
           /> */}
-        </form>
+        </Form>
       </div>
 
       <div>
         {allEventsList.map((eachEvent) => {
           return (
-            <div key={eachEvent._id}>
-              <img src={eachEvent.imgEvent} alt="Imagen Evento" width={300} />
-              <h3>{eachEvent.eventName}</h3>
-              <p>{eachEvent.sector}</p>
-              <p>Aforo disponible:{eachEvent.capacity}</p>
-              <p>
-                {eachEvent.startDate.slice(0, 10)} -{" "}
-                {eachEvent.endDate.slice(0, 10)}
-              </p>
+            <Card style={{ width: "18rem" }} key={eachEvent._id}>
+              <Card.Img
+                variant="top"
+                src={eachEvent.imgEvent}
+                alt="Imagen Evento"
+                width={300}
+              />
+              <Card.Body>
+                <Card.Title>{eachEvent.eventName}</Card.Title>
+                <Card.Text>
+                  <p>Sector: {eachEvent.sector}</p>
+                  <p>Aforo disponible: {eachEvent.capacity}</p>
+                  <p>Fecha inicio: {eachEvent.startDate.slice(0, 10)}</p>
+                  <p>Fecha fin: {eachEvent.endDate.slice(0, 10)}</p>
+                </Card.Text>
 
-              <Link to={`/events/${eachEvent._id}/details`}>Detalles</Link>
-              {/* <button onClick={() => handleInscription(eachEvent._id, eachEvent.capacity)}>Inscribirse/ Cancelar inscripción</button> */}
+                <Link to={`/events/${eachEvent._id}/details`}>
+                  <Button variant="primary">Detalles</Button>
+                </Link>
+                {/* <button onClick={() => handleInscription(eachEvent._id, eachEvent.capacity)}>Inscribirse/ Cancelar inscripción</button> */}
 
-              {errorMessage ? <p>{errorMessage}</p> : null}
-            </div>
+                {errorMessage ? <p>{errorMessage}</p> : null}
+              </Card.Body>
+            </Card>
           );
         })}
       </div>
