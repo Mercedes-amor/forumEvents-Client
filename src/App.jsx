@@ -30,7 +30,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
 
         <Route path="/deletedUser" element={<DeletedUser />} />
-        <Route path="/events" element={<IsPrivate><EventsList /></IsPrivate>} />
+        <Route path="/events/:query" element={<EventsList />} />
         <Route path="/events/create-event" element={<IsPrivate><CreateEvent /></IsPrivate>} />
         <Route path="/events/:eventId/details" element={<IsPrivate><EventDetails /></IsPrivate>} />
         <Route path="/events/:eventId" element={<EditEvent />}/>

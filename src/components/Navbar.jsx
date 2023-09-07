@@ -60,7 +60,7 @@ export default function Navbar() {
             <Link to="/userProfile">Perfil</Link>
           </Nav.Item>
           <Nav.Item>
-            <Link to="/events">Eventos</Link>
+            <Link to="/events/todos">Eventos</Link>
           </Nav.Item>
           <Button onClick={handlelogout}>Logout</Button>
         </>
