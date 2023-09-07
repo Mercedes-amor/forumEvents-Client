@@ -168,7 +168,7 @@ export default function EventDetails() {
             <div className="buttomsCard">
               {userRole === "admin" ? (
                 <div>
-                  <Link to={`/events/${params.eventId}`}>
+                  <Link to={`/events/${params.eventId}/edit`}>
                     <Button className="btn-admin">Modificar</Button>
                   </Link>
                   <Button className="btn-admin" onClick={handleEventDelete}>

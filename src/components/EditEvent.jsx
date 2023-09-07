@@ -132,6 +132,17 @@ export default function EditEvent() {
         <option value="false">No</option>
       </Form.Select>
       <br />
+      <FloatingLabel controlId="floatingInput" label="precio" className="mb-3">
+      
+      <Form.Control
+      placeholder="precio"
+        type="Number"
+        name="price"
+        onChange={handleFormChange}
+        value={editEvent.price}
+      />
+      </FloatingLabel>
+
       <FloatingLabel controlId="floatingInput" label="Capacidad" className="mb-3">
       
       <Form.Control

@@ -35,7 +35,7 @@ function App() {
         <Route path="/events/:query" element={<EventsList />} />
         <Route path="/events/create-event" element={<IsPrivate><CreateEvent /></IsPrivate>} />
         <Route path="/events/:eventId/details" element={<IsPrivate><EventDetails /></IsPrivate>} />
-        <Route path="/events/:eventId" element={<EditEvent />}/>
+        <Route path="/events/:eventId/edit" element={<EditEvent />}/>
         <Route path="/events/:eventId/:sessionId/:activeUserId" element={<IsPrivate><BookSession /></IsPrivate>} />
         <Route path="/userProfile"  element={<IsPrivate><UserProfile /></IsPrivate>}/>
 
