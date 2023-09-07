@@ -135,7 +135,7 @@ export default function EventDetails() {
   return (
     <div key={eventDetails.responseEvent._id}>
       <Card>
-        <Card.Img
+        <Card.Img className="imgEventDetail"
           variant="top"
           src={eventDetails.responseEvent.imgEvent}
           alt="Imagen Evento"
