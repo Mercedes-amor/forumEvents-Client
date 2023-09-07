@@ -110,6 +110,7 @@ function Signup() {
       <Button type="submit" variant="info">
         Signup
       </Button>
+      <Link to={"/login"}>¿Ya estás registrado? Logeate aquí.</Link>
 
       {errorMessage ? <p>{errorMessage}</p> : null}
     </Form>

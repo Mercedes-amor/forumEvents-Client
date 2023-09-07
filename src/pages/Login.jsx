@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import service from "../services/service.config";
 
 import { AuthContext } from "../context/auth.context";
@@ -71,6 +71,7 @@ function Login() {
         <br />
 
         <Button type="submit" >Login</Button>
+        <Link to={"/signup"} >¿Aún no tienes cuenta?, Registrate aquí.</Link>
 
         {errorMessage ? <p>{errorMessage}</p> : null}
       </Form>
