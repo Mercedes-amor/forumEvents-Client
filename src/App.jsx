@@ -1,5 +1,4 @@
 import { Route, Routes } from "react-router-dom";
-import "./App.css";
 import IsPrivate from "./components/IsPrivate";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
@@ -16,7 +15,7 @@ import PaymentSuccess from "./components/PaymentSuccess";
 
 //Bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import "./App.css";
 
 
 

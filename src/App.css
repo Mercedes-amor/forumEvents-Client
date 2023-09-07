@@ -5,12 +5,20 @@
 #7BA7B8
 #3C3B45 */
 
+
+
+/* PALETA DE COLORES2
+AZUL FUERTE #1E9199
+AZUL MEDIO #80D6DA
+AZUL CLARO #4EA6AC
+GRIS #9E9DA0 */
+
 #root {
   max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  margin: auto;
+  padding: 1rem;
   text-align: center;
-  background-color: #F7F6F8;
+  background-color: #9e9da056;
 }
 
 Form {
@@ -22,12 +30,37 @@ Form {
   box-shadow: 5px 5px 15px gray;
   align-items: center;
   padding: 5px;
-}
+  color: #1E9199;
+  }
 
 .me-auto :hover{
   
   border-radius: 10px ;
+  background-color:#1E9199;
+  color: white;
+  transition-duration: 0.5s;
+  height: 35px;
+  
 }
+/* LOGO */
+.logo {
+  width: 60vw;
+  margin-top: 20px;
+  border-radius: 10px;
+box-shadow: 0 0 15px #ddd;
+background: #fff;
+}
+
+.logo:hover{
+  border-radius:50%;
+  -webkit-border-radius:50%;
+  box-shadow: 0px 0px 15px 15px #1E9199;
+  -webkit-box-shadow: 0px 0px 15px 15px #1E9199;
+  transition-duration: 1s;
+  }
+
+
+/* BOTONES */
 
 .buttonDetails {
   margin: 5px;
@@ -38,25 +71,107 @@ Form {
   background-color: rgb(112, 106, 97);
 }
 
-.button {
+/* .button {
   margin: 5px;
   background-color: rgb(235, 176, 105);
+  color: orange;
+} */
+
+.btn-primary {
+  color: black;
+  background-color:#80D6DA;
+  border: black;
+  margin: 5px;
+}
+.btn-primary:hover{
+  color: rgb(255, 255, 255);
+  background-color:#1E9199;
+  border: 2px black;
+ 
+}
+.btn-confirm {
+  color: black;
+  background-color:#38c964;
+  border: black;
+  margin: 5px;
 }
 
-.dayCard {
-  padding: 30px;
-  background: #38937C;
-  box-shadow: 5px 5px 15px gray;
-  margin: 15px;
+.btn-confirm:hover {
+  color: rgb(255, 255, 255);
+  background-color:#0d6126;
+  border: black;
+  margin: 5px;
+}
+
+
+
+/* EVENT DETAILS */
+
+
+.cardEvent {
+  width: 94vw;
+  margin-bottom: 10px;
+}
+
+.divCard .card{
+  background: #9E9DA0;
+
 }
 .cardSession {
-  background:#ffffff;
+  border-radius: 10px;
+  background:linear-gradient(70deg, rgb(2, 51, 49),  #80d6da);
+  width: 85vw;
  
 }
 
 .containerDay {
   border: none;
-  background-color: #F7F6F8 ;
+  background-color: #9E9DA0  ;
+  max-width: 550px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
 }
 
+.dayCard {
+  padding: 30px;
+  /* background: #80D6DA; */
+  /* box-shadow: 5px 5px 15px gray; */
+  /* margin: 15px; */
+  font-size: 30px;
+  max-width: 450px;
+}
+
+
+/* MEDIA QUERYS */
+
+@media (min-width: 700px) {
+  .extContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+  .containerDay {
+    border: none;
+    background-color: #9E9DA0  ;
+    width: 350px;
+    display: flex;
+    align-items: center;
+  
+  }
+
+  .divCard .card {
+    background: #9E9DA0;
+    border: none;
+  
+  }
+  .cardSession {
+    border-radius: 10px;
+    background:linear-gradient(70deg, rgb(2, 51, 49),  #80D6DA);
+    width: 330px;
+    margin: 10px;
+   
+  }
+
+}

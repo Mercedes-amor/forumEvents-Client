@@ -4,6 +4,9 @@ import { useNavigate } from "react-router-dom";
 import service from "../services/service.config";
 import { AuthContext } from "../context/auth.context";
 
+// BOOTSTRAP
+import Button from "react-bootstrap/Button";
+
 export default function UserProfile() {
 
   const navigate = useNavigate();
@@ -80,12 +83,12 @@ try {
   return (
     <div>
       <h1>Hola {userDetails.username}, bienvenido.</h1>
-      <button onClick={handleShowDelete}>Eliminar cuenta</button>
+      <Button onClick={handleShowDelete}>Eliminar cuenta</Button>
       {showDelete ? 
       <div>
        <h4>¿Esta seguro de que desea eliminar su cuenta?</h4>
-        <button onClick={handleDeleteUser}>Si, eliminar cuenta</button>
-        <button onClick={handleShowDelete}>No, no quiero eliminar mi cuenta</button>
+        <Button onClick={handleDeleteUser}>Si, eliminar cuenta</Button>
+        <Button onClick={handleShowDelete}>No, no quiero eliminar mi cuenta</Button>
         </div> : null}
 
       {userDetails.eventsAsistance.length > 0
@@ -99,9 +102,9 @@ try {
                 <Link to={`/events/${eachEvent._id}/details`}>
                   <button>Detalles del evento</button>
                 </Link>
-                <button onClick={() => handleInscription(eachEvent._id)}>
+                <Button onClick={() => handleInscription(eachEvent._id)}>
                   Date de baja del evento
-                </button>
+                </Button>
               </div>
             );
           })

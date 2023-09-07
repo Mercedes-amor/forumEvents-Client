@@ -133,14 +133,14 @@ export default function EventDetails() {
 
   return (
     <div key={eventDetails.responseEvent._id}>
-      <Card style={{ width: "20rem" , margin:"15px"}}>
+      <Card>
         <Card.Img
           variant="top"
           src={eventDetails.responseEvent.imgEvent}
           alt="Imagen Evento"
           width={500}
         />
-        <Card.Body>
+        <Card.Body className="cardEvent">
           <Card.Title>{eventDetails.responseEvent.eventName}</Card.Title>
           <Card.Text>
             <p>Sector: {eventDetails.responseEvent.sector}</p>
@@ -166,9 +166,24 @@ export default function EventDetails() {
               <Button onClick={handleEventDelete}>Eliminar</Button>
             </div>
           ) : null}
+      {userRole === "admin" ? (
+        <div>
+          <Button className="btn-primary" onClick={handleShowForm}>
+            Crear nueva sesión
+          </Button>
 
+          {isFormShowing ? (
+            <CreateSession
+              params={params.eventId}
+              setIsFormShowing={setIsFormShowing}
+              handleRefresh={handleRefresh}
+            />
+          ) : null}
+        </div>
+      ) : null}
           {eventDetails.responseEvent.itsFree ? (
-            <Button variant="outline-dark"
+            <Button
+              variant="outline-dark"
               onClick={() =>
                 handleInscription(
                   eventDetails.responseEvent._id,
@@ -199,117 +214,127 @@ export default function EventDetails() {
           )}
         </Card.Body>
       </Card>
-      {eventDetails.sessionsArray.map((eachDay, i) => {
-        console.log("eachDay", eachDay);
-        return (
-          <div className="containerDay"  key={i}>
-           <div className="dayCard">
-            <h3>Sesiones Día: {i + 1}</h3>
-           </div>
-            
-            {eachDay.map((eachSession, i) => {
-              return (
-                <div  key={eachSession._id}>
-                  {isEditSessionShowing == eachSession._id.toString() ? (
-                    <div>
-                      <EditSession
-                        sessionId={eachSession._id}
-                        eventId={params.eventId}
-                        setIsEditSessionhowing={setIsEditSessionhowing}
-                        handleRefresh={handleRefresh}
-                        eachSession={eachSession}
-                      />
-                      <button onClick={() => handleShowEditSession(null)}>
-                        cerrar formulario
-                      </button>
-                    </div>
-                  ) : (
-                    <Card key={eventDetails.responseSession._id}>
-                      <Card.Body className="cardSession">
-                      <Card.Title>Sesión: {eachSession.sessionName}</Card.Title>
-                      <Card.Subtitle className="mb-2 text-muted">
-                      <p><b>Fecha:</b> {eachSession.dateSession} </p></Card.Subtitle>
-                      <p>Sala: <b>{eachSession.hall}</b> - Plazas restantes: <b>{eachSession.capacityHall -
-                          eachSession.assistants.length}</b></p>
-                      
-                      <Card.Text>{eachSession.description}</Card.Text>
+      <div className="extContainer">
+        {eventDetails.sessionsArray.map((eachDay, i) => {
+          console.log("eachDay", eachDay);
 
-           
+          return (
+            <div className="containerDay" key={i}>
+              {/* <div > */}
+              <h3 className="dayCard"> Día {i + 1}</h3>
+              {/* </div> */}
 
-                      {eventsUserArr.includes(params.eventId) === true &&
-                        eachSession.isAvailable && (
-                          <Link
-                            to={`/events/${params.eventId}/${eachSession._id}/${activeUserId}`}
-                          >
-                            <Button className="button">Reservar sesión</Button>
-                          </Link>
-                        )}
-
-                      {eventsUserArr.includes(params.eventId) === true &&
-                      eachSession.hostedBy &&
-                      eachSession.hostedBy !== activeUserId ? (
-                        <Button className="button"
-                          onClick={() =>
-                            handleJoinSession(
-                              eachSession._id,
-                              eachSession.assistants,
-                              eachSession.capacityHall
-                            )
-                          }
-                        >
-                          {eachSession.assistants.includes(activeUserId) ? (
-                            <p>Date de baja de la sesión</p>
-                          ) : (
-                            <p>Apuntate a la sesión</p>
-                          )}
+              {eachDay.map((eachSession, i) => {
+                return (
+                  <div className="divCard" key={eachSession._id}>
+                    {isEditSessionShowing == eachSession._id.toString() ? (
+                      <div>
+                        <EditSession
+                          sessionId={eachSession._id}
+                          eventId={params.eventId}
+                          setIsEditSessionhowing={setIsEditSessionhowing}
+                          handleRefresh={handleRefresh}
+                          eachSession={eachSession}
+                        />
+                        <Button onClick={() => handleShowEditSession(null)}>
+                          cerrar formulario
                         </Button>
-                      ) : (
-                        <p>
-                          {eachSession.hostedBy === activeUserId
-                            ? "Eres el host actual de esta sesión"
-                            : null}
-                        </p>
-                      )}
+                      </div>
+                    ) : (
+                      <Card
+                        className="divCard"
+                        key={eventDetails.responseSession._id}
+                      >
+                        <Card.Body className="cardSession">
+                          <Card.Title>
+                            Sesión: {eachSession.sessionName}
+                          </Card.Title>
+                          <Card.Subtitle className="mb-2 text-muted">
+                            <p>
+                              <b>Fecha:</b> {eachSession.dateSession}{" "}
+                            </p>
+                          </Card.Subtitle>
+                          <p>
+                            Sala: <b>{eachSession.hall}</b> - Plazas restantes:{" "}
+                            <b>
+                              {eachSession.capacityHall -
+                                eachSession.assistants.length}
+                            </b>
+                          </p>
 
-                      {userRole === "admin" ? (
-                        <div>
-                          <Button className="button"
-                            onClick={() =>
-                              handleShowEditSession(eachSession._id.toString())
-                            }
-                          >
-                            Editar sesión
-                          </Button>
-                          <Button className="button"
-                            onClick={() => handleSessionDelete(eachSession._id)}
-                          >
-                            Borrar sesión
-                          </Button>
-                        </div>
-                      ) : null}
-                      </Card.Body>
-                    </Card>
-                  )}
-                </div>
-              );
-            })}
-            
-          </div>
-        );
-      })}
-      {userRole === "admin" ? (
-        <div>
-          <Button id="button" onClick={handleShowForm}>Crear sesión</Button>
+                          <Card.Text>{eachSession.description}</Card.Text>
 
-          {isFormShowing ? (
-            <CreateSession
-              params={params.eventId}
-              setIsFormShowing={setIsFormShowing}
-              handleRefresh={handleRefresh}
-            />
-          ) : null}
-        </div>
-      ) : null}
+                          {eventsUserArr.includes(params.eventId) === true &&
+                            eachSession.isAvailable && (
+                              <Link
+                                to={`/events/${params.eventId}/${eachSession._id}/${activeUserId}`}
+                              >
+                                <Button className="button">
+                                  Reservar sesión
+                                </Button>
+                              </Link>
+                            )}
+
+                          {eventsUserArr.includes(params.eventId) === true &&
+                          eachSession.hostedBy &&
+                          eachSession.hostedBy !== activeUserId ? (
+                            <Button
+                              className="button"
+                              onClick={() =>
+                                handleJoinSession(
+                                  eachSession._id,
+                                  eachSession.assistants,
+                                  eachSession.capacityHall
+                                )
+                              }
+                            >
+                              {eachSession.assistants.includes(activeUserId) ? (
+                                <p>Date de baja de la sesión</p>
+                              ) : (
+                                <p>Apuntate a la sesión</p>
+                              )}
+                            </Button>
+                          ) : (
+                            <p>
+                              {eachSession.hostedBy === activeUserId
+                                ? "Eres el host actual de esta sesión"
+                                : null}
+                            </p>
+                          )}
+
+                          {userRole === "admin" ? (
+                            <div>
+                              <Button
+                                className="button"
+                                onClick={() =>
+                                  handleShowEditSession(
+                                    eachSession._id.toString()
+                                  )
+                                }
+                              >
+                                Editar sesión
+                              </Button>
+                              <Button
+                                className="button"
+                                onClick={() =>
+                                  handleSessionDelete(eachSession._id)
+                                }
+                              >
+                                Borrar sesión
+                              </Button>
+                            </div>
+                          ) : null}
+                        </Card.Body>
+                      </Card>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          );
+        })}
+      </div>
+
     </div>
   );
 }

@@ -146,8 +146,8 @@ export default function CreateSession(props) {
       <label htmlFor="isAvailable" >No</label>
      
       <br />
-      <Button type="submit" variant="info" onClick={handleAddSession}>
-        Crear sesión
+      <Button className="btn-confirm" type="submit" onClick={handleAddSession}>
+        Añadir sesión
       </Button>
 
       {errorMessage ? <p>{errorMessage}</p> : null}
