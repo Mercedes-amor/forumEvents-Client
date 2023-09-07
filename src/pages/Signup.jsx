@@ -45,7 +45,8 @@ function Signup() {
   };
 
   return (
-    <Form onSubmit={handleSignup}>
+    <div className="formContainer">
+          <Form onSubmit={handleSignup}>
       <FloatingLabel
         controlId="floatingInput"
         label="username"
@@ -112,6 +113,8 @@ function Signup() {
 
       {errorMessage ? <p>{errorMessage}</p> : null}
     </Form>
+    </div>
+
   );
 }
 

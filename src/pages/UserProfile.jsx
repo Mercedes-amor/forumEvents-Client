@@ -90,7 +90,10 @@ try {
         <Button onClick={handleDeleteUser}>Si, eliminar cuenta</Button>
         <Button onClick={handleShowDelete}>No, no quiero eliminar mi cuenta</Button>
         </div> : null}
-
+        <br />
+        <hr />
+        <h4>Eventos a los que estás inscritos:</h4>
+        <br />
       {userDetails.eventsAsistance.length > 0
         ? userDetails.eventsAsistance.map((eachEvent) => {
             return (
@@ -100,7 +103,7 @@ try {
                 <p>{eachEvent.startDate}</p>
                 <p>{eachEvent.endDate}</p>
                 <Link to={`/events/${eachEvent._id}/details`}>
-                  <button>Detalles del evento</button>
+                  <Button>Detalles del evento</Button>
                 </Link>
                 <Button onClick={() => handleInscription(eachEvent._id)}>
                   Date de baja del evento

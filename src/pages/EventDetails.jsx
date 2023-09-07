@@ -13,6 +13,8 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
+import Collapse from "react-bootstrap/Collapse";
+
 
 export default function EventDetails() {
   const { activeUserId, userRole } = useContext(AuthContext);
@@ -140,7 +142,8 @@ export default function EventDetails() {
           alt="Imagen Evento"
           width={500}
         />
-        <Card.Body className="cardEvent">
+        <div className="extCardEvent">
+                  <Card.Body className="cardEvent">
           <Card.Title>{eventDetails.responseEvent.eventName}</Card.Title>
           <Card.Text>
             <p>Sector: {eventDetails.responseEvent.sector}</p>
@@ -158,6 +161,9 @@ export default function EventDetails() {
               {eventDetails.responseEvent.capacity - usersArrayInEvent.length}
             </p>
           </Card.Text>
+              <div>
+
+             
           {userRole === "admin" ? (
             <div>
               <Link to={`/events/${params.eventId}`}>
@@ -171,7 +177,7 @@ export default function EventDetails() {
           <Button className="btn-primary" onClick={handleShowForm}>
             Crear nueva sesión
           </Button>
-
+        
           {isFormShowing ? (
             <CreateSession
               params={params.eventId}
@@ -179,7 +185,10 @@ export default function EventDetails() {
               handleRefresh={handleRefresh}
             />
           ) : null}
+
+
         </div>
+
       ) : null}
           {eventDetails.responseEvent.itsFree ? (
             <Button
@@ -209,10 +218,14 @@ export default function EventDetails() {
                 )
               ) : (
                 <PaymentIntent productDetails={eventDetails.responseEvent} />
-              )}
+              )} 
             </div>
           )}
+</div>
+
         </Card.Body>
+        </div>
+
       </Card>
       <div className="extContainer">
         {eventDetails.sessionsArray.map((eachDay, i) => {

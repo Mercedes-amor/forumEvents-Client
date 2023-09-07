@@ -23,7 +23,13 @@ GRIS #9E9DA0 */
 
 Form {
   text-align: left;
-  
+      
+}
+
+.formContainer {
+  display: flex;
+  justify-content: center;
+  margin: 10px;
 }
 .me-auto {
 
@@ -164,6 +170,7 @@ background: #fff;
   .divCard .card {
     background: #9E9DA0;
     border: none;
+
   
   }
   .cardSession {
@@ -173,5 +180,22 @@ background: #fff;
     margin: 10px;
    
   }
+  .extCardEvent {
+    display: flex;
+    justify-content: center;
+   }
 
+  .cardEvent {
+    width: 800px;
+    margin-bottom: 10px;
+    text-align: center;
+    display: flex;
+    justify-content: space-around;
+  }
+
+
+  form {
+    min-width: 600px;
+    
+  }
 }

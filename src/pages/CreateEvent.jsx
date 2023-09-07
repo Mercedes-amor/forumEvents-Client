@@ -9,8 +9,8 @@ import Collapse from "react-bootstrap/Collapse";
 import Toast from "react-bootstrap/Toast";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
 
 export default function CreateEvent() {
   const navigate = useNavigate();
@@ -92,121 +92,129 @@ export default function CreateEvent() {
   };
 
   return (
-    <Form>
-      <FloatingLabel
-        controlId="floatingInput"
-        label="Nombre del evento"
-        className="mb-3"
-        htmlFor="eventName"
-      >
-        <Form.Control
-          type="text"
-          name="eventName"
-          onChange={handleFormChange}
-          value={newEvent.eventName}
-          placeholder="Nombre del evento"
-        />
-      </FloatingLabel>
-      
-      <FloatingLabel
-        htmlFor="startDate"
-        controlId="floatingInput"
-        label="Fecha inicio"
-        className="mb-3"
-      >
-        <Form.Control
-          type="date"
-          name="startDate"
-          onChange={handleFormChange}
-          value={newEvent.startDate}
-        />
-      </FloatingLabel>
-      
-      <FloatingLabel
-        htmlFor="endDate"
-        controlId="floatingInput"
-        label="Fecha finalización"
-        className="mb-3"
-      >
-        <Form.Control
-          type="date"
-          name="endDate"
-          onChange={handleFormChange}
-          value={newEvent.endDate}
-        />
-      </FloatingLabel>
-           
-      <Form.Group as={Col} controlId="formItsFree">
-      <Form.Label htmlFor="itsFree">¿Es gratuito?</Form.Label>
-      <Form.Select
-        name="itsFree"
-        onChange={handleFormChange}
-        value={newEvent.itsFree}
-      >
-        <option value="true">si</option>
-        <option value="false">No</option>
-      </Form.Select>
-      </Form.Group>
-      <Form.Label htmlFor="price">Precio:</Form.Label>
-      <Form.Control
-        type="Number"
-        name="price"
-        onChange={handleFormChange}
-        value={newEvent.price}
-      />
+    <div className="formContainer">
+      <Form>
+        <FloatingLabel
+          controlId="floatingInput"
+          label="Nombre del evento"
+          className="mb-3"
+          htmlFor="eventName"
+        >
+          <Form.Control
+            type="text"
+            name="eventName"
+            onChange={handleFormChange}
+            value={newEvent.eventName}
+            placeholder="Nombre del evento"
+          />
+        </FloatingLabel>
 
-      <FloatingLabel
-        htmlFor="capacity"
-        label="Introducir aforo"
-        className="mb-3"
-      >
+        <FloatingLabel
+          htmlFor="startDate"
+          controlId="floatingInput"
+          label="Fecha inicio"
+          className="mb-3"
+        >
+          <Form.Control
+            type="date"
+            name="startDate"
+            onChange={handleFormChange}
+            value={newEvent.startDate}
+          />
+        </FloatingLabel>
+
+        <FloatingLabel
+          htmlFor="endDate"
+          controlId="floatingInput"
+          label="Fecha finalización"
+          className="mb-3"
+        >
+          <Form.Control
+            type="date"
+            name="endDate"
+            onChange={handleFormChange}
+            value={newEvent.endDate}
+          />
+        </FloatingLabel>
+
+        <Form.Group as={Col} controlId="formItsFree">
+          <Form.Label htmlFor="itsFree">¿Es gratuito?</Form.Label>
+          <Form.Select
+            name="itsFree"
+            onChange={handleFormChange}
+            value={newEvent.itsFree}
+          >
+            <option value="true">si</option>
+            <option value="false">No</option>
+          </Form.Select>
+        </Form.Group>
+        <Form.Label htmlFor="price">Precio:</Form.Label>
         <Form.Control
           type="Number"
-          name="capacity"
+          name="price"
           onChange={handleFormChange}
-          value={newEvent.capacity}
-          placeholder="Introducir aforo"
+          value={newEvent.price}
         />
-      </FloatingLabel>
-   
-      <Form.Group as={Col} controlId="formSector">
-      <Form.Label htmlFor="sector">Sector</Form.Label>
-      <Form.Select name="sector" onChange={handleFormChange} value={newEvent.sector}>
-        <option value="otro">Otro</option>
-        <option value="tecnológico">tecnológico</option>
-        <option value="medicina">medicina</option>
-        <option value="ciencia">ciencia</option>
-        <option value="gastronómico">gastronómico</option>
-        <option value="ocio">ocio</option>
-      </Form.Select>
-</Form.Group>
 
+        <FloatingLabel
+          htmlFor="capacity"
+          label="Introducir aforo"
+          className="mb-3"
+        >
+          <Form.Control
+            type="Number"
+            name="capacity"
+            onChange={handleFormChange}
+            value={newEvent.capacity}
+            placeholder="Introducir aforo"
+          />
+        </FloatingLabel>
 
-      {/* IMAGEN */}
-      <Form.Label htmlFor="imgEvent">Imagen del evento</Form.Label>
-      <Form.Control
-        type="file"
-        name="imgEvent"
-        onChange={handleFileUpload}
-        // value={imageUrl}
-        disabled={isUploading}
-      />
-  <br />
-      <FloatingLabel htmlFor="description" controlId="floatingInput"
-        label="Introducir breve descripción del evento"
-        className="mb-3">
-      <Form.Control
-        type="text"
-        name="description"
-        onChange={handleFormChange}
-        value={newEvent.description}
-      />
-      </FloatingLabel>
- 
-      <Button type="submit" onClick={handleAddEvent}>
-        Crear evento
-      </Button>
-      {errorMessage ? <p>{errorMessage}</p> : null}
-    </Form>
+        <Form.Group as={Col} controlId="formSector">
+          <Form.Label htmlFor="sector">Sector</Form.Label>
+          <Form.Select
+            name="sector"
+            onChange={handleFormChange}
+            value={newEvent.sector}
+          >
+            <option value="otro">Otro</option>
+            <option value="tecnológico">tecnológico</option>
+            <option value="medicina">medicina</option>
+            <option value="ciencia">ciencia</option>
+            <option value="gastronómico">gastronómico</option>
+            <option value="ocio">ocio</option>
+          </Form.Select>
+        </Form.Group>
+
+        {/* IMAGEN */}
+        <Form.Label htmlFor="imgEvent">Imagen del evento</Form.Label>
+        <Form.Control
+          type="file"
+          name="imgEvent"
+          onChange={handleFileUpload}
+          // value={imageUrl}
+          disabled={isUploading}
+        />
+        <br />
+        <FloatingLabel
+          htmlFor="description"
+          controlId="floatingInput"
+          label="Introducir breve descripción del evento"
+          className="mb-3"
+        >
+          <Form.Control
+            type="text"
+            name="description"
+            onChange={handleFormChange}
+            value={newEvent.description}
+          />
+        </FloatingLabel>
+
+        <Button type="submit" onClick={handleAddEvent}>
+          Crear evento
+        </Button>
+        {errorMessage ? <p>{errorMessage}</p> : null}
+      </Form>
+    </div>
   );
 }

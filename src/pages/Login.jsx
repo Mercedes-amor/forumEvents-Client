@@ -44,7 +44,7 @@ function Login() {
   };
 
   return (
-    <div>
+    <div className="formContainer">
       <Form onSubmit={handleLogin}>
         <FloatingLabel controlId="floatingInput" label="Email" className="mb-3">
           <Form.Control
@@ -70,7 +70,7 @@ function Login() {
         </FloatingLabel>
         <br />
 
-        <Button type="submit" variant="info">Login</Button>
+        <Button type="submit" >Login</Button>
 
         {errorMessage ? <p>{errorMessage}</p> : null}
       </Form>
