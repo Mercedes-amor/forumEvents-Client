@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import service from "../services/service.config";
-
+import { uploadImageService } from "../services/upload.services";
 
 //BOOSTRAP
 import FloatingLabel from "react-bootstrap/FloatingLabel";
@@ -64,8 +64,8 @@ export default function EditEvent() {
   const handleUpdateEvent = async (e) => {
     e.preventDefault();
     try {
-      await service.put(`/events/${params.eventId}`, {
-        editEvent,
+      await service.put(`/events/${params.eventId}/edit`, {
+        editEvent, imageUrl
 
       });
 
@@ -74,8 +74,11 @@ export default function EditEvent() {
   };
 
   const handleFormChange = (input) => {
+ 
+
     setEditEvent({
       ...editEvent,
+     
       [input.target.name]: input.target.value,
     });
   };
@@ -159,7 +162,7 @@ export default function EditEvent() {
       placeholder="Imagen del evento"
         type="file"
         name="imgEvent"
-        onChange={handleFileUpload}
+        onChange={handleFileUpload }
         
         disabled={isUploading}
       />
