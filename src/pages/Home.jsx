@@ -7,7 +7,9 @@ export default function Home() {
     <div>
       <img className="logo" src='./public/forumEvents alargado.png' alt="logo"/>
       <Login />
+      <hr />
      <EventsShowedInHome />
+     <hr />
      <FilteredEventsFooterSearch /> 
     </div>
   )
