@@ -25,7 +25,9 @@ export default function EventsList() {
     try {
       const response = await service.get(`/events/${queryInput}`);
       console.log(response);
+      if ( response.data.eventData.length > 6) {
       let randomEvents = [];
+
       for (let i = 0; i < 6;) {
         let randomEvent =
           response.data.eventData[
@@ -40,8 +42,13 @@ export default function EventsList() {
           randomEvents.push(randomEvent);
           i++
         }
-      }
+        
+      } 
       setFilteredEvents(randomEvents);
+    } else {
+      setFilteredEvents(response.data.eventData)
+    }
+     
 
       console.log(filteredEvents);
 
