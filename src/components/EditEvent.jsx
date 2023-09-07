@@ -56,6 +56,7 @@ export default function EditEvent() {
     try {
       const response = await service.get(`/events/${params.eventId}/details`);
       console.log("prueba response", response.data);
+     
       setEditEvent(response.data.responseEvent);
     } catch (error) {
       console.log(error);
@@ -66,7 +67,6 @@ export default function EditEvent() {
     try {
       await service.put(`/events/${params.eventId}/edit`, {
         editEvent, imageUrl
-
       });
 
       navigate(`/events/${params.eventId}/details`);
@@ -128,15 +128,15 @@ export default function EditEvent() {
         onChange={handleFormChange}
         value={editEvent.itsFree}
       >
-        <option value="true">si</option>
-        <option value="false">No</option>
+        <option value='true'>si</option>
+        <option value='false'>No</option>
       </Form.Select>
       <br />
       <FloatingLabel controlId="floatingInput" label="precio" className="mb-3">
       
       <Form.Control
       placeholder="precio"
-        type="Number"
+        type='number'
         name="price"
         onChange={handleFormChange}
         value={editEvent.price}
@@ -147,7 +147,7 @@ export default function EditEvent() {
       
       <Form.Control
       placeholder="Capacidad"
-        type="Number"
+        type='number'
         name="capacity"
         onChange={handleFormChange}
         value={editEvent.capacity}

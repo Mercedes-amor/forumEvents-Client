@@ -179,7 +179,13 @@ background: #fff;
   max-width: 450px;
 }
 
+/* FOOTER */
 
+
+.enlacesFooter {
+  display: flex;
+  justify-content: space-around;
+}
 /* MEDIA QUERYS */
 
 @media (min-width: 700px) {

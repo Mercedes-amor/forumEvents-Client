@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 export default function Footer() {
   return (
     <div>
+
       <div className="enlacesFooter" >
         <Link to={"/"}>
           <p>Home</p>
@@ -21,6 +22,7 @@ export default function Footer() {
           <p>Logueate</p>
         </Link>
       </div>
+      
 <div>
     <h3>by Mercedes Amor and Lucas Navarro</h3>
 </div>
