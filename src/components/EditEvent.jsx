@@ -183,6 +183,7 @@ export default function EditEvent() {
       <Button type="submit" onClick={handleUpdateEvent}>
         Guardar cambios
       </Button>
+      {errorMessage ? <p>{errorMessage}</p> : null}
     </Form>
     </div>
 
