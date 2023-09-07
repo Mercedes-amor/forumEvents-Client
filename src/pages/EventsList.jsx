@@ -86,11 +86,12 @@ export default function EventsList() {
           return (
             <div className="containerZoom">
             <Card className="divCardList"  key={eachEvent._id}>
-              <Card.Img
+              <Card.Img className="cardImg"
                 variant="top"
                 src={eachEvent.imgEvent}
                 alt="Imagen Evento"
                 width={300}
+                
               />
               <Card.Body >
                 <Card.Title>{eachEvent.eventName}</Card.Title>

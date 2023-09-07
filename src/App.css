@@ -222,6 +222,9 @@ background: #fff;
     align-items: center;
    }
 
+   .cardImg {
+    height: 200px;
+   }
    .nameEvent {
     align-items: center;
     padding-top: 6rem;
@@ -233,11 +236,6 @@ background: #fff;
     padding-top: 5%;
     align-items: center;
    }
-   /* .card-title.p.cardText {
-    align-items: center;
-    padding-top: 10%;
-   } */
-   
 
   .cardEvent {
     width: 800px;
