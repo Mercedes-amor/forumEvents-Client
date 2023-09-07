@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import {Link, useNavigate } from "react-router-dom";
 import service from "../services/service.config";
 
 //Bootstrap
@@ -8,6 +8,7 @@ import Collapse from "react-bootstrap/Collapse";
 import Toast from "react-bootstrap/Toast";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
+
 
 function Signup() {
   const navigate = useNavigate();
@@ -105,11 +106,12 @@ function Signup() {
           placeholder="Confirm password"
         />
       </FloatingLabel>
-      <br />
-
-      <Button type="submit" variant="info">
+      
+      <Button type="submit">
         Signup
       </Button>
+      <br />
+      <br />
       <Link to={"/login"}>¿Ya estás registrado? Logeate aquí.</Link>
 
       {errorMessage ? <p>{errorMessage}</p> : null}

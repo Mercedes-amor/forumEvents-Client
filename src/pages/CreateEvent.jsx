@@ -73,7 +73,7 @@ export default function CreateEvent() {
         imgEvent: imageUrl,
       });
       console.log(newEvent);
-      navigate("/events");
+      navigate("/events/todos");
     } catch (error) {
       if (error.response && error.response.status === 400) {
         setErrorMessage(error.response.data.errorMessage);

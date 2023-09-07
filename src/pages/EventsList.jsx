@@ -84,8 +84,8 @@ export default function EventsList() {
         <div className="extContainer">
         {allEventsList.map((eachEvent) => {
           return (
-            <div className="containerZoom">
-            <Card className="divCardList"  key={eachEvent._id}>
+            <div className="containerZoom" key={eachEvent._id}>
+            <Card className="divCardList"  >
               <Card.Img className="cardImg"
                 variant="top"
                 src={eachEvent.imgEvent}
@@ -97,8 +97,7 @@ export default function EventsList() {
                 <Card.Title>{eachEvent.eventName}</Card.Title>
                 <Card.Text>
                   <p>Sector: {eachEvent.sector}</p>
-                  <p>Aforo disponible: {eachEvent.capacity}</p>
-                  <p>Fecha inicio: {eachEvent.startDate.slice(0, 10)}</p>
+                   <p>Fecha inicio: {eachEvent.startDate.slice(0, 10)}</p>
                   <p>Fecha fin: {eachEvent.endDate.slice(0, 10)}</p>
                 </Card.Text>
 

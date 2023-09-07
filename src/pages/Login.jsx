@@ -68,9 +68,11 @@ function Login() {
             onChange={handlePasswordChange}
           />
         </FloatingLabel>
-        <br />
+        
 
         <Button type="submit" >Login</Button>
+        <br />
+        <br />
         <Link to={"/signup"} >¿Aún no tienes cuenta?, Registrate aquí.</Link>
 
         {errorMessage ? <p>{errorMessage}</p> : null}

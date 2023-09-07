@@ -48,9 +48,17 @@ Form {
   height: 35px;
   
 }
-/* LOGO */
+/* LOGO Y CABECERA*/
+
+.cabeceraHome {
+  
+  flex-direction: column;
+  justify-content: center;
+
+
+}
 .logo {
-  width: 60vw;
+  width: 90vw;
   margin-top: 20px;
   border-radius: 10px;
 box-shadow: 0 0 15px #ddd;
@@ -176,6 +184,17 @@ background: #fff;
 
 @media (min-width: 700px) {
 
+  .cabeceraHome {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .logo {
+  width: 60vw;
+
+}
   .containerZoom:hover .divCardList {
     -webkit-transform:scale(1.1);transform:scale(1.1);
     transition-duration: 0.5s;
@@ -224,6 +243,7 @@ background: #fff;
 
    .cardImg {
     height: 200px;
+    object-fit: cover;
    }
    .nameEvent {
     align-items: center;
