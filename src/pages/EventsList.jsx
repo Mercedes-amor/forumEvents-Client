@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import service from "../services/service.config";
 
 //Bootstrap
@@ -9,10 +9,17 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 
 export default function EventsList() {
+
+  let valuToFilter = "todos"
+  const location = useLocation()
+  if(location.state.query !== null) {
+    valuToFilter = location.state.query
+  }
+
   const [allEventsList, setAllEventsList] = useState(null);
   const [filteredEvents, setFilteredEvents] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const [queryInput, setQueryInput] = useState("todos");
+  const [queryInput, setQueryInput] = useState(valuToFilter);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
