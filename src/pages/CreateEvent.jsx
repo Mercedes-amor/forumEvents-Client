@@ -210,7 +210,7 @@ export default function CreateEvent() {
           />
         </FloatingLabel>
 
-        <Button type="submit" onClick={handleAddEvent}>
+        <Button className="btn-admin" type="submit" onClick={handleAddEvent}>
           Crear evento
         </Button>
         {errorMessage ? <p>{errorMessage}</p> : null}

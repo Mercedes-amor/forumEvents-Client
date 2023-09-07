@@ -146,7 +146,7 @@ export default function EventDetails() {
             <Card.Title className="nameEvent">
               {eventDetails.responseEvent.eventName}
             </Card.Title>
-            <Card.Text >
+            <Card.Text>
               <div className="textEvent">
                 <p>Sector: {eventDetails.responseEvent.sector}</p>
                 <p>{eventDetails.responseEvent.description}</p>
@@ -169,15 +169,16 @@ export default function EventDetails() {
               {userRole === "admin" ? (
                 <div>
                   <Link to={`/events/${params.eventId}`}>
-                    <Button className="buttonDetails">Modificar</Button>
+                    <Button className="btn-admin">Modificar</Button>
                   </Link>
-                  <Button onClick={handleEventDelete}>Eliminar</Button>
+                  <Button className="btn-admin" onClick={handleEventDelete}>
+                    Eliminar
+                  </Button>
                 </div>
               ) : null}
 
               {eventDetails.responseEvent.itsFree ? (
                 <Button
-                  variant="outline-dark"
                   onClick={() =>
                     handleInscription(
                       eventDetails.responseEvent._id,
@@ -188,7 +189,7 @@ export default function EventDetails() {
                   {usersArrayInEvent.includes(activeUserId) ? (
                     <p>Date de baja del evento</p>
                   ) : (
-                    <p className="buttonGreen">Apuntate al evento</p>
+                    <p className="buttonGreen">Apúntate al evento</p>
                   )}
                 </Button>
               ) : (
@@ -208,8 +209,9 @@ export default function EventDetails() {
                   )}
                 </div>
               )}
+
               {userRole === "admin" ? (
-                <Button className="btn-primary" onClick={handleShowForm}>
+                <Button className="btn-admin" onClick={handleShowForm}>
                   Crear nueva sesión
                 </Button>
               ) : null}
@@ -302,7 +304,7 @@ export default function EventDetails() {
                               {eachSession.assistants.includes(activeUserId) ? (
                                 <p>Date de baja de la sesión</p>
                               ) : (
-                                <p>Apuntate a la sesión</p>
+                                <p>Apúntate a la sesión</p>
                               )}
                             </Button>
                           ) : (
@@ -316,7 +318,7 @@ export default function EventDetails() {
                           {userRole === "admin" ? (
                             <div>
                               <Button
-                                className="button"
+                                className="btn-edit"
                                 onClick={() =>
                                   handleShowEditSession(
                                     eachSession._id.toString()
@@ -326,7 +328,7 @@ export default function EventDetails() {
                                 Editar sesión
                               </Button>
                               <Button
-                                className="button"
+                                className="btn-edit"
                                 onClick={() =>
                                   handleSessionDelete(eachSession._id)
                                 }

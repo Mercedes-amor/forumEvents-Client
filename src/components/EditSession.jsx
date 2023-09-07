@@ -164,7 +164,7 @@ export default function EditSession(props) {
       <br />
       {errorMessage ? <p>{errorMessage}</p> : null}
       <br />
-      <Button type="submit" className="btn-confirm " onClick={handleEditSession}>
+      <Button type="submit" className="btn-admin " onClick={handleEditSession}>
         Editar sesión
       </Button>
 

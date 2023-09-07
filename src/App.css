@@ -82,6 +82,7 @@ background: #fff;
   color: black;
   background-color:#80D6DA;
   border: black;
+  box-shadow: 5px 5px 10px gray;
   margin: 5px;
 }
 .btn-primary:hover{
@@ -90,9 +91,25 @@ background: #fff;
   border: 2px black;
  
 }
+
+.btn-admin {
+  color: black;
+  background-color:#e2d524;
+  border: black;
+  box-shadow: 5px 5px 10px gray;
+  margin: 5px;
+}
+
+
+.btn-admin:hover {
+  color: rgb(255, 255, 255);
+  background-color:#ee822b;
+  border: 2px black;
+}
+
 .btn-confirm {
   color: black;
-  background-color:#38c964;
+  background-color:#167592;
   border: black;
   margin: 5px;
   text-align: center;
@@ -100,7 +117,7 @@ background: #fff;
 
 .btn-confirm:hover {
   color: rgb(255, 255, 255);
-  background-color:#0d6126;
+  background-color:#074547;
   border: black;
   margin: 5px;
 }
@@ -130,7 +147,7 @@ background: #fff;
 }
 .cardSession {
   border-radius: 10px;
-  background:linear-gradient(70deg, rgb(2, 51, 49),  #80d6da);
+  background:linear-gradient(60deg, rgb(255, 255, 255),  #5faeb3);
   width: 85vw;
  
 }
@@ -195,7 +212,6 @@ background: #fff;
   }
   .cardSession {
     border-radius: 10px;
-    background:linear-gradient(70deg, rgb(2, 51, 49),  #80D6DA);
     width: 330px;
     margin: 10px;
    

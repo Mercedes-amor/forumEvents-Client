@@ -180,7 +180,7 @@ export default function EditEvent() {
         value={editEvent.description}
       />
       </FloatingLabel>
-      <Button type="submit" onClick={handleUpdateEvent}>
+      <Button  className="btn-admin" type="submit" onClick={handleUpdateEvent}>
         Guardar cambios
       </Button>
       {errorMessage ? <p>{errorMessage}</p> : null}
