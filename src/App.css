@@ -77,11 +77,6 @@ background: #fff;
   background-color: rgb(112, 106, 97);
 }
 
-/* .button {
-  margin: 5px;
-  background-color: rgb(235, 176, 105);
-  color: orange;
-} */
 
 .btn-primary {
   color: black;
@@ -113,14 +108,23 @@ background: #fff;
 
 /* EVENT DETAILS */
 
+.extContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
 .cardEvent {
   width: 94vw;
   margin-bottom: 10px;
-}
 
+  }
+  .divCard{
+    margin: 10px;
+  }
 .divCard .card{
   background: #9E9DA0;
+  margin: 10px;
 
 }
 .cardSession {
@@ -166,7 +170,10 @@ background: #fff;
     align-items: center;
   
   }
-
+  .divCardList{
+    margin: 10px;
+    max-width: 300px;
+  }
   .divCard .card {
     background: #9E9DA0;
     border: none;
@@ -195,7 +202,7 @@ background: #fff;
 
 
   form {
-    min-width: 600px;
+    min-width: 300px;
     
   }
 }

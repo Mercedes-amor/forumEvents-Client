@@ -55,7 +55,7 @@ export default function EventsList() {
 
   return (
     <>
-      <div>
+      <div className="formContainer">
         <Form>
         <label htmlFor="sector">Filtre por sector</label>
           <Form.Select
@@ -72,35 +72,21 @@ export default function EventsList() {
             <option value="gastronómico">gastronómico</option>
             <option value="ocio">ocio</option>
           </Form.Select>
-
-          {/* <label htmlFor="startDate">Fecha de Inicio</label>
-          <input
-            type="date"
-            name="startDate"
-            onChange={handleSearch}
-            value={startDate}
-          />
-          <label htmlFor="endtDate">Fecha de finalización</label>
-          <input
-            type="date"
-            name="endDate"
-            onChange={handleSearch}
-            value={endDate}
-          /> */}
+   
         </Form>
       </div>
 
-      <div>
+      <div className="extContainer">
         {allEventsList.map((eachEvent) => {
           return (
-            <Card style={{ width: "18rem" }} key={eachEvent._id}>
+            <Card className="divCardList"  key={eachEvent._id}>
               <Card.Img
                 variant="top"
                 src={eachEvent.imgEvent}
                 alt="Imagen Evento"
                 width={300}
               />
-              <Card.Body>
+              <Card.Body >
                 <Card.Title>{eachEvent.eventName}</Card.Title>
                 <Card.Text>
                   <p>Sector: {eachEvent.sector}</p>

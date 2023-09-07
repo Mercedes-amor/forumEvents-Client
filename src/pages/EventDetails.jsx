@@ -15,7 +15,6 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import Collapse from "react-bootstrap/Collapse";
 
-
 export default function EventDetails() {
   const { activeUserId, userRole } = useContext(AuthContext);
   console.log("userId", activeUserId);
@@ -143,89 +142,84 @@ export default function EventDetails() {
           width={500}
         />
         <div className="extCardEvent">
-                  <Card.Body className="cardEvent">
-          <Card.Title>{eventDetails.responseEvent.eventName}</Card.Title>
-          <Card.Text>
-            <p>Sector: {eventDetails.responseEvent.sector}</p>
-            <p>{eventDetails.responseEvent.description}</p>
-            <p>
-              {eventDetails.responseEvent.startDate.slice(0, 10)} -{" "}
-              {eventDetails.responseEvent.endDate.slice(0, 10)}
-            </p>
-            {eventDetails.responseEvent.price > 0 ? (
-              <p>Precio: {eventDetails.responseEvent.price / 100}€</p>
-            ) : null}
+          <Card.Body className="cardEvent">
+            <Card.Title>{eventDetails.responseEvent.eventName}</Card.Title>
+            <Card.Text>
+              <p>Sector: {eventDetails.responseEvent.sector}</p>
+              <p>{eventDetails.responseEvent.description}</p>
+              <p>
+                {eventDetails.responseEvent.startDate.slice(0, 10)} -{" "}
+                {eventDetails.responseEvent.endDate.slice(0, 10)}
+              </p>
+              {eventDetails.responseEvent.price > 0 ? (
+                <p>Precio: {eventDetails.responseEvent.price / 100}€</p>
+              ) : null}
 
-            <p>
-              Plazas disponibles:{" "}
-              {eventDetails.responseEvent.capacity - usersArrayInEvent.length}
-            </p>
-          </Card.Text>
-              <div>
-
-             
-          {userRole === "admin" ? (
+              <p>
+                Plazas disponibles:{" "}
+                {eventDetails.responseEvent.capacity - usersArrayInEvent.length}
+              </p>
+            </Card.Text>
             <div>
-              <Link to={`/events/${params.eventId}`}>
-                <Button className="buttonDetails">Modificar</Button>
-              </Link>
-              <Button onClick={handleEventDelete}>Eliminar</Button>
-            </div>
-          ) : null}
-      {userRole === "admin" ? (
-        <div>
-          <Button className="btn-primary" onClick={handleShowForm}>
-            Crear nueva sesión
-          </Button>
-        
-          {isFormShowing ? (
-            <CreateSession
-              params={params.eventId}
-              setIsFormShowing={setIsFormShowing}
-              handleRefresh={handleRefresh}
-            />
-          ) : null}
-
-
-        </div>
-
-      ) : null}
-          {eventDetails.responseEvent.itsFree ? (
-            <Button
-              variant="outline-dark"
-              onClick={() =>
-                handleInscription(
-                  eventDetails.responseEvent._id,
-                  eventDetails.responseEvent.capacity
-                )
-              }
-            >
-              {usersArrayInEvent.includes(activeUserId) ? (
-                <p>Date de baja del evento</p>
-              ) : (
-                <p className="buttonGreen">Apuntate al evento</p>
-              )}
-            </Button>
-          ) : (
-            <div>
-              {showPaymentIntent === false ? (
-                !usersArrayInEvent.includes(activeUserId) ? (
-                  <Button onClick={() => setShowPaymentIntent(true)}>
-                    Purchase
+              {userRole === "admin" ? (
+                <div>
+                  <Link to={`/events/${params.eventId}`}>
+                    <Button className="buttonDetails">Modificar</Button>
+                  </Link>
+                  <Button onClick={handleEventDelete}>Eliminar</Button>
+                </div>
+              ) : null}
+              {userRole === "admin" ? (
+                <div>
+                  <Button className="btn-primary" onClick={handleShowForm}>
+                    Crear nueva sesión
                   </Button>
-                ) : (
-                  <p>Ya has realizado la compra para este evento</p>
-                )
+
+                  {isFormShowing ? (
+                    <CreateSession
+                      params={params.eventId}
+                      setIsFormShowing={setIsFormShowing}
+                      handleRefresh={handleRefresh}
+                    />
+                  ) : null}
+                </div>
+              ) : null}
+              {eventDetails.responseEvent.itsFree ? (
+                <Button
+                  variant="outline-dark"
+                  onClick={() =>
+                    handleInscription(
+                      eventDetails.responseEvent._id,
+                      eventDetails.responseEvent.capacity
+                    )
+                  }
+                >
+                  {usersArrayInEvent.includes(activeUserId) ? (
+                    <p>Date de baja del evento</p>
+                  ) : (
+                    <p className="buttonGreen">Apuntate al evento</p>
+                  )}
+                </Button>
               ) : (
-                <PaymentIntent productDetails={eventDetails.responseEvent} />
-              )} 
+                <div>
+                  {showPaymentIntent === false ? (
+                    !usersArrayInEvent.includes(activeUserId) ? (
+                      <Button onClick={() => setShowPaymentIntent(true)}>
+                        Purchase
+                      </Button>
+                    ) : (
+                      <p>Ya has realizado la compra para este evento</p>
+                    )
+                  ) : (
+                    <PaymentIntent
+                      productDetails={eventDetails.responseEvent}
+                    />
+                  )}
+                </div>
+              )}
             </div>
-          )}
-</div>
-
-        </Card.Body>
+          </Card.Body>
         </div>
-
       </Card>
       <div className="extContainer">
         {eventDetails.sessionsArray.map((eachDay, i) => {
@@ -233,9 +227,7 @@ export default function EventDetails() {
 
           return (
             <div className="containerDay" key={i}>
-              {/* <div > */}
               <h3 className="dayCard"> Día {i + 1}</h3>
-              {/* </div> */}
 
               {eachDay.map((eachSession, i) => {
                 return (
@@ -347,7 +339,6 @@ export default function EventDetails() {
           );
         })}
       </div>
-
     </div>
   );
 }

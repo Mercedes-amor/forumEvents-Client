@@ -89,7 +89,8 @@ export default function EditEvent() {
 
   console.log("edit event", editEvent);
   return (
-    <Form>
+    <div className="formContainer">
+          <Form>
       <FloatingLabel controlId="floatingInput" label="Nombre del evento" className="mb-3">
       
       <Form.Control
@@ -179,9 +180,11 @@ export default function EditEvent() {
         value={editEvent.description}
       />
       </FloatingLabel>
-      <Button type="submit" variant="info" onClick={handleUpdateEvent}>
+      <Button type="submit" onClick={handleUpdateEvent}>
         Guardar cambios
       </Button>
     </Form>
+    </div>
+
   );
 }

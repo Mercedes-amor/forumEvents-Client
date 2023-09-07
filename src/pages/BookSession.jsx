@@ -75,7 +75,7 @@ export default function EditSession() {
         />
       </FloatingLabel>
 
-      <Button type="submit" variant="info" onClick={handleEditSession}>
+      <Button type="submit" onClick={handleEditSession}>
         Reservar sesión
       </Button>
 
