@@ -12,10 +12,12 @@ import EditEvent from "./components/EditEvent";
 import BookSession from "./pages/BookSession"
 import DeletedUser from "./pages/DeletedUser";
 import PaymentSuccess from "./components/PaymentSuccess";
+import Footer from "./components/Footer";
 
 //Bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css";
+
 
 
 
@@ -40,7 +42,10 @@ function App() {
         <Route path="/payment-success" element={ <PaymentSuccess/> }/>
         
      </Routes>
+
+     <Footer />
     </>
+
   );
 }
 
