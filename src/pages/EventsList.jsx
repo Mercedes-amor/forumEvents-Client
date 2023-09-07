@@ -76,9 +76,10 @@ export default function EventsList() {
         </Form>
       </div>
 
-      <div className="extContainer">
+        <div className="extContainer">
         {allEventsList.map((eachEvent) => {
           return (
+            <div className="containerZoom">
             <Card className="divCardList"  key={eachEvent._id}>
               <Card.Img
                 variant="top"
@@ -103,9 +104,12 @@ export default function EventsList() {
                 {errorMessage ? <p>{errorMessage}</p> : null}
               </Card.Body>
             </Card>
+            </div>
           );
         })}
       </div>
+
+
     </>
   );
 }

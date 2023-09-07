@@ -143,24 +143,29 @@ export default function EventDetails() {
         />
         <div className="extCardEvent">
           <Card.Body className="cardEvent">
-            <Card.Title>{eventDetails.responseEvent.eventName}</Card.Title>
-            <Card.Text>
-              <p>Sector: {eventDetails.responseEvent.sector}</p>
-              <p>{eventDetails.responseEvent.description}</p>
-              <p>
-                {eventDetails.responseEvent.startDate.slice(0, 10)} -{" "}
-                {eventDetails.responseEvent.endDate.slice(0, 10)}
-              </p>
-              {eventDetails.responseEvent.price > 0 ? (
-                <p>Precio: {eventDetails.responseEvent.price / 100}€</p>
-              ) : null}
+            <Card.Title className="nameEvent">
+              {eventDetails.responseEvent.eventName}
+            </Card.Title>
+            <Card.Text >
+              <div className="textEvent">
+                <p>Sector: {eventDetails.responseEvent.sector}</p>
+                <p>{eventDetails.responseEvent.description}</p>
+                <p>
+                  {eventDetails.responseEvent.startDate.slice(0, 10)} -{" "}
+                  {eventDetails.responseEvent.endDate.slice(0, 10)}
+                </p>
+                {eventDetails.responseEvent.price > 0 ? (
+                  <p>Precio: {eventDetails.responseEvent.price / 100}€</p>
+                ) : null}
 
-              <p>
-                Plazas disponibles:{" "}
-                {eventDetails.responseEvent.capacity - usersArrayInEvent.length}
-              </p>
+                <p>
+                  Plazas disponibles:{" "}
+                  {eventDetails.responseEvent.capacity -
+                    usersArrayInEvent.length}
+                </p>
+              </div>
             </Card.Text>
-            <div className="bottonsCard">
+            <div className="buttomsCard">
               {userRole === "admin" ? (
                 <div>
                   <Link to={`/events/${params.eventId}`}>
