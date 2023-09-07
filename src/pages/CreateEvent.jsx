@@ -144,8 +144,8 @@ export default function CreateEvent() {
             onChange={handleFormChange}
             value={newEvent.itsFree}
           >
-            <option value='true'>si</option>
-            <option value='false'>No</option>
+            <option value="true">si</option>
+            <option value="false">No</option>
           </Form.Select>
         </Form.Group>
         <Form.Label htmlFor="price">Precio:</Form.Label>
@@ -155,7 +155,7 @@ export default function CreateEvent() {
           onChange={handleFormChange}
           value={newEvent.price}
         />
-
+        <br />
         <FloatingLabel
           htmlFor="capacity"
           label="Introducir aforo"

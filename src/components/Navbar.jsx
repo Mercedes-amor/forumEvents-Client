@@ -8,7 +8,6 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Button from "react-bootstrap/Button";
 
-
 export default function Navbar() {
   const { activeUserId, userRole } = useContext(AuthContext);
   const params = useParams();
@@ -30,19 +29,21 @@ export default function Navbar() {
   return (
     <Nav fill variant="tabs" defaultActiveKey="/home" className="me-auto">
       <Nav.Item>
-        <Link to="/">Home</Link>
+        <Link className="linkNav" to="/">
+          Home
+        </Link>
       </Nav.Item>
 
       {!activeUserId ? (
         <>
           <Nav.Item>
-            <Link eventKey="link-1" to="/signup">
+            <Link className="linkNav" eventKey="link-1" to="/signup">
               signup
             </Link>
           </Nav.Item>
 
           <Nav.Item>
-            <Link eventKey="link-2" to="/login">
+            <Link className="linkNav" eventKey="link-2" to="/login">
               Login
             </Link>
           </Nav.Item>
@@ -50,19 +51,25 @@ export default function Navbar() {
       ) : null}
       {userRole === "admin" ? (
         <Nav.Item>
-          <Link to="/events/create-event">Crear evento</Link>
+          <Link className="linkNav" to="/events/create-event">
+            Crear evento
+          </Link>
         </Nav.Item>
       ) : null}
 
       {activeUserId ? (
         <>
           <Nav.Item>
-            <Link to="/userProfile">Perfil</Link>
+            <Link className="linkNav" to="/userProfile">
+              Perfil
+            </Link>
           </Nav.Item>
           <Nav.Item>
-            <Link to="/events/todos">Eventos</Link>
+            <Link className="linkNav" to="/events/todos">
+              Eventos
+            </Link>
           </Nav.Item>
-          <Button onClick={handlelogout}>Logout</Button>
+          <Button className="buttomLogout"  onClick={handlelogout}>Logout</Button>
         </>
       ) : null}
     </Nav>

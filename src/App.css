@@ -1,12 +1,5 @@
-/* PALETA DE COLORES
-#F7F6F8
-#BAB2A8
-#957F7E
-#7BA7B8
-#3C3B45 */
 
-
-
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,400;1,100&display=swap');
 /* PALETA DE COLORES2
 AZUL FUERTE #1E9199
 AZUL MEDIO #80D6DA
@@ -19,8 +12,22 @@ GRIS #9E9DA0 */
   padding: 1rem;
   text-align: center;
   background-color: #9e9da056;
+  font-family: 'Barlow', sans-serif;
+
+}
+.linkNav {
+text-decoration: none;
+font-family: 'Barlow', sans-serif;
+font-size: 20px;
+color: #1E9199
 }
 
+.buttomLogout {
+text-decoration: none;
+font-family: 'Barlow', sans-serif;
+font-size: 15px;
+font-weight: bold;
+}
 Form {
   text-align: center;
       
@@ -67,9 +74,9 @@ background: #fff;
 
 .logo:hover{
   border-radius:50%;
-  -webkit-border-radius:50%;
-  box-shadow: 0px 0px 15px 15px #1E9199;
-  -webkit-box-shadow: 0px 0px 15px 15px #1E9199;
+  -webkit-border-radius:7%;
+  box-shadow: 0px 0px 10px 10px #1E9199;
+  -webkit-box-shadow: 0px 0px 10px 10px #1e91995b;
   transition-duration: 1s;
   }
 
@@ -184,7 +191,14 @@ background: #fff;
 
 .enlacesFooter {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+
+}
+
+.linkFooter {
+  margin:5px;
+  text-decoration: none;
+font-family: 'Barlow', sans-serif;
 }
 /* MEDIA QUERYS */
 
@@ -202,7 +216,7 @@ background: #fff;
 
 }
   .containerZoom:hover .divCardList {
-    -webkit-transform:scale(1.1);transform:scale(1.1);
+    -webkit-transform:scale(1.05);transform:scale(1.05);
     transition-duration: 0.5s;
   }
 
