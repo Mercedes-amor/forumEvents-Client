@@ -56,6 +56,7 @@ export default function CreateSession(props) {
   };
 
   return (
+    <div className="formContainer">
     <Form>
       <FloatingLabel controlId="floatingInput" label="Nombre de la sesión" className="mb-3">
       <Form.Control
@@ -153,5 +154,6 @@ export default function CreateSession(props) {
       {errorMessage ? <p>{errorMessage}</p> : null}
       {/* {successMessage ? <p>{successMessage}</p> : null} */}
     </Form>
+    </div>
   );
 }

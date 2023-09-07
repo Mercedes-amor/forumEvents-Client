@@ -22,7 +22,7 @@ GRIS #9E9DA0 */
 }
 
 Form {
-  text-align: left;
+  text-align: center;
       
 }
 
@@ -95,6 +95,7 @@ background: #fff;
   background-color:#38c964;
   border: black;
   margin: 5px;
+  text-align: center;
 }
 
 .btn-confirm:hover {
@@ -160,6 +161,7 @@ background: #fff;
   .extContainer{
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: space-around;
   }
   .containerDay {
@@ -173,6 +175,7 @@ background: #fff;
   .divCardList{
     margin: 10px;
     max-width: 300px;
+    min-width: 300px;
   }
   .divCard .card {
     background: #9E9DA0;
@@ -190,7 +193,22 @@ background: #fff;
   .extCardEvent {
     display: flex;
     justify-content: center;
+    align-items: center;
    }
+
+   .card-title.h5 {
+    align-items: center;
+    padding-top: 10%;
+   }
+
+   .bottonsCard{
+    padding-top: 5%;
+   }
+   .card-title.p.cardText {
+    align-items: center;
+    padding-top: 10%;
+   }
+   
 
   .cardEvent {
     width: 800px;
@@ -200,7 +218,10 @@ background: #fff;
     justify-content: space-around;
   }
 
-
+  Form {
+    text-align: center;
+        
+  }
   form {
     min-width: 300px;
     

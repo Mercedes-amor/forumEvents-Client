@@ -160,7 +160,7 @@ export default function EventDetails() {
                 {eventDetails.responseEvent.capacity - usersArrayInEvent.length}
               </p>
             </Card.Text>
-            <div>
+            <div className="bottonsCard">
               {userRole === "admin" ? (
                 <div>
                   <Link to={`/events/${params.eventId}`}>
@@ -169,21 +169,7 @@ export default function EventDetails() {
                   <Button onClick={handleEventDelete}>Eliminar</Button>
                 </div>
               ) : null}
-              {userRole === "admin" ? (
-                <div>
-                  <Button className="btn-primary" onClick={handleShowForm}>
-                    Crear nueva sesión
-                  </Button>
 
-                  {isFormShowing ? (
-                    <CreateSession
-                      params={params.eventId}
-                      setIsFormShowing={setIsFormShowing}
-                      handleRefresh={handleRefresh}
-                    />
-                  ) : null}
-                </div>
-              ) : null}
               {eventDetails.responseEvent.itsFree ? (
                 <Button
                   variant="outline-dark"
@@ -217,8 +203,23 @@ export default function EventDetails() {
                   )}
                 </div>
               )}
+              {userRole === "admin" ? (
+                <Button className="btn-primary" onClick={handleShowForm}>
+                  Crear nueva sesión
+                </Button>
+              ) : null}
             </div>
           </Card.Body>
+        </div>
+
+        <div>
+          {isFormShowing ? (
+            <CreateSession
+              params={params.eventId}
+              setIsFormShowing={setIsFormShowing}
+              handleRefresh={handleRefresh}
+            />
+          ) : null}
         </div>
       </Card>
       <div className="extContainer">
