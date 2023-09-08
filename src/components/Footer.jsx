@@ -24,7 +24,7 @@ export default function Footer() {
       </div>
       
 <div>
-    <h3> &copy; Mercedes Amor and Lucas Navarro</h3>
+    <p className="footerP"> &copy; Mercedes Amor & Lucas Navarro</p>
 </div>
       
     </div>

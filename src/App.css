@@ -195,10 +195,22 @@ background: #fff;
 
 }
 
+.footerP {
+  font-size: 18px;
+  color: #0e4246
+}
+
 .linkFooter {
   margin:5px;
   text-decoration: none;
 font-family: 'Barlow', sans-serif;
+}
+
+/* SPINNER */
+
+.spinnerColor {
+  color: #1E9199;
+  margin: 15px;
 }
 /* MEDIA QUERYS */
 

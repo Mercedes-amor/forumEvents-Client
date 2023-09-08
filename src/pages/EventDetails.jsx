@@ -11,9 +11,8 @@ import PaymentIntent from "../components/PaymentIntent";
 //Bootstrap
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import FloatingLabel from "react-bootstrap/FloatingLabel";
-import Form from "react-bootstrap/Form";
-import Collapse from "react-bootstrap/Collapse";
+import Spinner from 'react-bootstrap/Spinner';
+
 
 export default function EventDetails() {
   const { activeUserId, userRole } = useContext(AuthContext);
@@ -129,7 +128,7 @@ export default function EventDetails() {
     }
   };
   if (eventDetails === null) {
-    return <h3>...cargando</h3>;
+    return <Spinner animation="border" className="spinnerColor" />;
   }
 
   return (
