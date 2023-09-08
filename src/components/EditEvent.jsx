@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import service from "../services/service.config";
 import { uploadImageService } from "../services/upload.services";
 
@@ -194,6 +194,12 @@ export default function EditEvent() {
       <Button  className="btn-admin" type="submit" onClick={handleUpdateEvent}>
         Guardar cambios
       </Button>
+      <Link to={`/events/${params.eventId}/details`}>
+      <Button  className="btn-cancel">
+        Cancelar
+      </Button>
+      </Link>
+      
       {errorMessage ? <p>{errorMessage}</p> : null}
     </Form>
     </div>

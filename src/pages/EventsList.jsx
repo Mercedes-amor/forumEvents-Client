@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useLocation, useParams } from "react-router-dom";
+import { Link, useNavigate, useLocation, useParams, Navigate } from "react-router-dom";
 import service from "../services/service.config";
 
 //Bootstrap
@@ -12,31 +12,28 @@ export default function EventsList() {
 
  const params = useParams()
  console.log(params)
-  
+  const Navigate = useNavigate()
 
   const [allEventsList, setAllEventsList] = useState(null);
   const [filteredEvents, setFilteredEvents] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const [queryInput, setQueryInput] = useState(params.query);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     getData();
-  }, [queryInput, params]); //aquí solo el params
+  }, [params]);
 
-  //No utilizar queryInput, sustituirlo por navigate, linea 32
 
   const handleSearch = (event) => {
     console.log(event.target.value);
 
-    setQueryInput(event.target.value);
+    Navigate(`/events/${event.target.value}`)
 
-    // handleRefresh();
   };
 
   const getData = async () => {
     try {
-      const response = await service.get(`/events/${queryInput}`);
+      const response = await service.get(`/events/${params.query}`);
       console.log(response);
       setAllEventsList(response.data.eventData);
       console.log(allEventsList);

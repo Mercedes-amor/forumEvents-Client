@@ -115,7 +115,20 @@ background: #fff;
   margin: 5px;
 }
 
+.btn-cancel {
+  color: black;
+  background-color:#db5618;
+  border: black;
+  box-shadow: 5px 5px 10px gray;
+  margin: 5px;
+}
 
+.btn-cancel:hover{
+  color: rgb(255, 255, 255);
+  background-color:#99451e;
+  border: 2px black;
+ 
+}
 .btn-admin:hover {
   color: rgb(255, 255, 255);
   background-color:#ee822b;
