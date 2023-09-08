@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   Link,
   useNavigate,
@@ -6,15 +6,19 @@ import {
   useParams,
   Navigate,
 } from "react-router-dom";
-import service from "../services/service.config";
 
+import service from "../services/service.config";
+import { AuthContext } from "../context/auth.context";
 //Bootstrap
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
 import Spinner from "react-bootstrap/Spinner";
 
+
 export default function EventsList() {
+  const { activeUserId, userRole } = useContext(AuthContext);
+
   const params = useParams();
   //  console.log(params)
   const Navigate = useNavigate();
@@ -104,9 +108,15 @@ export default function EventsList() {
                     <p>Fecha fin: {eachEvent.endDate.slice(0, 10)}</p>
                   </Card.Text>
 
-                  <Link to={`/events/${eachEvent._id}/details`}>
-                    <Button variant="primary">Detalles</Button>
-                  </Link>
+                  {!activeUserId ? (
+                    <Link to={"/login"}>
+                      Inicia sesión para ver los detalles
+                    </Link>
+                  ) : (
+                    <Link to={`/events/${eachEvent._id}/details`}>
+                      <Button variant="primary">Detalles</Button>
+                    </Link>
+                  )}
                   {/* <button onClick={() => handleInscription(eachEvent._id, eachEvent.capacity)}>Inscribirse/ Cancelar inscripción</button> */}
 
                   {errorMessage ? <p>{errorMessage}</p> : null}

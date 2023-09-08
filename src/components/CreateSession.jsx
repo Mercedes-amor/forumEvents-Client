@@ -13,6 +13,7 @@ export default function CreateSession(props) {
   const setIsFormShowing = props.setIsFormShowing
   const handleRefresh = props.handleRefresh
   
+  
   const navigate = useNavigate();
 
   // console.log("este console es", paramsEventId);

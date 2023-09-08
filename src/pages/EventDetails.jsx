@@ -362,6 +362,7 @@ export default function EventDetails() {
           );
         })}
       </div>
+      {errorMessage ? <p>{errorMessage}</p> : null}
     </div>
   );
 }

@@ -85,7 +85,7 @@ App designed to manage a space for events, fairs, congresses, etc.
 - IsPrivate
 - PaymentIntent
 - PaymentSuccess
-- UserInscription
+
 
 
 ## Services
