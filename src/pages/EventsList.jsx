@@ -22,14 +22,16 @@ export default function EventsList() {
 
   useEffect(() => {
     getData();
-  }, [queryInput]);
+  }, [queryInput, params]); //aquí solo el params
+
+  //No utilizar queryInput, sustituirlo por navigate, linea 32
 
   const handleSearch = (event) => {
     console.log(event.target.value);
 
     setQueryInput(event.target.value);
 
-    handleRefresh();
+    // handleRefresh();
   };
 
   const getData = async () => {
