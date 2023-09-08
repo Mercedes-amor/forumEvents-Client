@@ -6,8 +6,8 @@ import { AuthContext } from "../context/auth.context";
 //Bootstrap
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import FloatingLabel from "react-bootstrap/FloatingLabel";
-import Form from "react-bootstrap/Form";
+import Spinner from 'react-bootstrap/Spinner';
+
 
 export default function EventsList() {
   const { activeUserId, userRole } = useContext(AuthContext);
@@ -65,7 +65,7 @@ export default function EventsList() {
   //   return <h3>...cargando</h3>;
   // }
   if (isLoading) {
-    return <h3>...cargando</h3>;
+    return <Spinner animation="border" className="spinnerColor" />;
   }
 
   return (

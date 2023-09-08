@@ -6,25 +6,25 @@ export default function Footer() {
     <div>
 
       <div className="enlacesFooter" >
-        <Link to={"/"}>
+        <Link className="linkFooter" to={"/"}>
           <p>Home</p>
         </Link>
-        <Link to={"/userProfile"}>
+        <Link className="linkFooter" to={"/userProfile"}>
           <p>Perfil</p>
         </Link>
-        <Link to={"/events/todos"}>
+        <Link className="linkFooter" to={"/events/todos"}>
           <p>Eventos</p>
         </Link>
-        <Link to={"/signup"}>
+        <Link className="linkFooter" to={"/signup"}>
           <p>Registrate</p>
         </Link>
-        <Link to={"/login"}>
+        <Link className="linkFooter" to={"/login"}>
           <p>Logueate</p>
         </Link>
       </div>
       
 <div>
-    <h3>by Mercedes Amor and Lucas Navarro</h3>
+    <p className="footerP"> &copy; Mercedes Amor & Lucas Navarro</p>
 </div>
       
     </div>

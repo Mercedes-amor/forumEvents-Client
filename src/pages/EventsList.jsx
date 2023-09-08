@@ -5,8 +5,8 @@ import service from "../services/service.config";
 //Bootstrap
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
+import Spinner from 'react-bootstrap/Spinner';
 
 export default function EventsList() {
 
@@ -22,14 +22,16 @@ export default function EventsList() {
 
   useEffect(() => {
     getData();
-  }, [queryInput]);
+  }, [queryInput, params]); //aquí solo el params
+
+  //No utilizar queryInput, sustituirlo por navigate, linea 32
 
   const handleSearch = (event) => {
     console.log(event.target.value);
 
     setQueryInput(event.target.value);
 
-    handleRefresh();
+    // handleRefresh();
   };
 
   const getData = async () => {
@@ -55,7 +57,7 @@ export default function EventsList() {
   //   return <h3>...cargando</h3>;
   // }
   if (isLoading) {
-    return <h3>...cargando</h3>;
+    return <Spinner animation="border" className="spinnerColor" />;
   }
 
   return (

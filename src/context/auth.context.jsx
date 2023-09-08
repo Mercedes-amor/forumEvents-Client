@@ -3,6 +3,10 @@ import service from "../services/service.config";
 
 const AuthContext = createContext();
 
+// BOOTSTRAP
+import Spinner from 'react-bootstrap/Spinner';
+
+
 function AuthWrapper(props) {
   const [isUserActive, setIsUserActive] = useState(false);
   const [activeUserId, setActiveUserId] = useState(null);
@@ -41,7 +45,7 @@ function AuthWrapper(props) {
   };
 
   if (isPageLoading === true) {
-    return <h3>... validando credenciales</h3>;
+    return <Spinner animation="border" className="spinnerColor" />;
   }
 
   return (

@@ -47,6 +47,7 @@ export default function EditSession() {
   };
 
   return (
+    <div className="formContainer">
     <Form>
       <FloatingLabel
         controlId="floatingInput"
@@ -82,5 +83,6 @@ export default function EditSession() {
       {errorMessage ? <p>{errorMessage}</p> : null}
       {/* {successMessage ? <p>{successMessage}</p> : null} */}
     </Form>
+    </div>
   );
 }

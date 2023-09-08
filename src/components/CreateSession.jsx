@@ -139,7 +139,7 @@ export default function CreateSession(props) {
       />
       </FloatingLabel>
      
-      <p>¿Esta disponible?</p>
+      <p>¿Está disponible?</p>
       <input onChange={handleFormChange} type="radio"  name="isAvailable" value="true" />
       <label htmlFor="isAvailable" >Si</label>
       
@@ -147,7 +147,7 @@ export default function CreateSession(props) {
       <label htmlFor="isAvailable" >No</label>
      
       <br />
-      <Button className="btn-confirm" type="submit" onClick={handleAddSession}>
+      <Button type="submit" onClick={handleAddSession}>
         Añadir sesión
       </Button>
 
