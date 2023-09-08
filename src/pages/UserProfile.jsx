@@ -14,6 +14,7 @@ export default function UserProfile() {
   const { verifyToken } = useContext(AuthContext);
   const [userDetails, setUserDetails] = useState(null);
   const [showDelete, setShowDelete] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     getData();
@@ -24,9 +25,12 @@ export default function UserProfile() {
       const response = await service("/users/userProfile");
 
       setUserDetails(response.data);
-      console.log("userData", response.data);
+      // console.log("userData", response.data);
     } catch (err) {
-      console.log(err);
+      if (error.response && error.response.status === 400) {
+        setErrorMessage(error.response.data.errorMessage);
+      }
+      // console.log(err);
     }
   };
 
@@ -58,14 +62,14 @@ export default function UserProfile() {
       eventsUserArr.push(event._id);
     });
 
-    console.log(eventsUserArr);
+    // console.log(eventsUserArr);
     try {
       await service.put(`/events/${eventId}/inscription`, {
         eventsUserArr,
       });
       handleRefresh();
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       if (error.response && error.response.status === 400) {
         setErrorMessage(error.response.data.errorMessage);
       }
@@ -125,6 +129,7 @@ export default function UserProfile() {
           })
         : null}
     </div>
+    {errorMessage ? <p>{errorMessage}</p> : null}
     </div>
   );
 }

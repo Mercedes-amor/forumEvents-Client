@@ -11,7 +11,7 @@ function AuthWrapper(props) {
   const [isUserActive, setIsUserActive] = useState(false);
   const [activeUserId, setActiveUserId] = useState(null);
  const [userRole, setUserRole] = useState(null)
-
+ const [errorMessage, setErrorMessage] = useState("");
   const [isPageLoading, setIsPageLoading] = useState(true);
 
   useEffect(() => {
@@ -30,7 +30,10 @@ function AuthWrapper(props) {
       setActiveUserId(response.data._id);
       setIsPageLoading(false);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
+      if (error.response && error.response.status === 400) {
+        setErrorMessage(error.response.data.errorMessage);
+      }
       setIsUserActive(false);
       setActiveUserId(null);
       setIsPageLoading(false);

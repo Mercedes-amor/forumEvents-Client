@@ -15,7 +15,7 @@ export default function EditSession(props) {
     handleRefresh,
     eachSession,
   } = props;
-  console.log(props);
+  // console.log(props);
 
   const [editSession, setEditSession] = useState({
     sessionName: eachSession.sessionName,
@@ -41,7 +41,7 @@ export default function EditSession(props) {
       handleRefresh();
       setSuccessMessage("todo ok");
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       if (error.response && error.response.status === 400) {
         setErrorMessage(error.response.data.errorMessage);
       }

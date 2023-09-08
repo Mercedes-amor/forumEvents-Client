@@ -35,7 +35,7 @@ function Signup() {
       });
       navigate("/login");
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       if (error.response && error.response.status === 400) {
         setErrorMessage(error.response.data.errorMessage);
       }
