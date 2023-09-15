@@ -15,6 +15,8 @@ export default function EventsList() {
   const [errorMessage, setErrorMessage] = useState("");
   const [queryInput, setQueryInput] = useState("todos");
   const [isLoading, setIsLoading] = useState(true);
+  
+  
 
   useEffect(() => {
     getData();
@@ -23,7 +25,7 @@ export default function EventsList() {
   const getData = async () => {
     try {
       const response = await service.get(`/events/${queryInput}`);
-      console.log(response);
+      // console.log(response);
       if (response.data.eventData.length > 6) {
         let randomEvents = [];
 
@@ -47,13 +49,16 @@ export default function EventsList() {
         setFilteredEvents(response.data.eventData);
       }
 
-      console.log(filteredEvents);
+      // console.log(filteredEvents);
 
       setIsLoading(false);
       // setEventsUserArr(response.data.userData.eventsAsistance)
       // console.log(response.data.userData.eventsAsistance)
     } catch (error) {
-      console.log(error);
+      if (error.response && error.response.status === 400) {
+        setErrorMessage(error.response.data.errorMessage);
+      }
+      // console.log(error);
       // Navigate("/error")
     }
   };

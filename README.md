@@ -97,7 +97,7 @@ Control of capacity, registration for the sessions and payment platform.
 - IsPrivate
 - PaymentIntent
 - PaymentSuccess
-- UserInscription
+
 
 
 ## Services

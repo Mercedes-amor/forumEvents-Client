@@ -32,7 +32,7 @@ export default function EditSession() {
 
       navigate(`/events/${eventId}/details`);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       if (error.response && error.response.status === 400) {
         setErrorMessage(error.response.data.errorMessage);
       }

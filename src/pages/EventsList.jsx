@@ -1,21 +1,30 @@
-import { useEffect, useState } from "react";
-import { Link, useNavigate, useLocation, useParams, Navigate } from "react-router-dom";
-import service from "../services/service.config";
+import { useContext, useEffect, useState } from "react";
+import {
+  Link,
+  useNavigate,
+  useLocation,
+  useParams,
+  Navigate,
+} from "react-router-dom";
 
+import service from "../services/service.config";
+import { AuthContext } from "../context/auth.context";
 //Bootstrap
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
-import Spinner from 'react-bootstrap/Spinner';
+import Spinner from "react-bootstrap/Spinner";
+
 
 export default function EventsList() {
+  const { activeUserId, userRole } = useContext(AuthContext);
 
- const params = useParams()
- console.log(params)
-  const Navigate = useNavigate()
+  const params = useParams();
+  //  console.log(params)
+  const Navigate = useNavigate();
 
   const [allEventsList, setAllEventsList] = useState(null);
-  const [filteredEvents, setFilteredEvents] = useState("");
+
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
@@ -23,26 +32,27 @@ export default function EventsList() {
     getData();
   }, [params]);
 
-
   const handleSearch = (event) => {
-    console.log(event.target.value);
+    // console.log(event.target.value);
 
-    Navigate(`/events/${event.target.value}`)
-
+    Navigate(`/events/${event.target.value}`);
   };
 
   const getData = async () => {
     try {
       const response = await service.get(`/events/${params.query}`);
-      console.log(response);
+      // console.log(response);
       setAllEventsList(response.data.eventData);
-      console.log(allEventsList);
+      // console.log(allEventsList);
 
       setIsLoading(false);
       // setEventsUserArr(response.data.userData.eventsAsistance)
       // console.log(response.data.userData.eventsAsistance)
     } catch (error) {
-      console.log(error);
+      if (error.response && error.response.status === 400) {
+        setErrorMessage(error.response.data.errorMessage);
+      }
+      // console.log(error);
       // Navigate("/error")
     }
   };
@@ -61,13 +71,12 @@ export default function EventsList() {
     <>
       <div className="formContainer">
         <Form>
-        <label htmlFor="sector">Filtre por sector</label>
+          <label htmlFor="sector">Filtre por sector</label>
           <Form.Select
             aria-label="Default select example"
             onChange={handleSearch}
             name="select"
           >
-
             <option value="todos">todos</option>
             <option value="Otro">Otro</option>
             <option value="tecnológico">tecnológico</option>
@@ -76,44 +85,47 @@ export default function EventsList() {
             <option value="gastronómico">gastronómico</option>
             <option value="ocio">ocio</option>
           </Form.Select>
-   
         </Form>
       </div>
 
-        <div className="extContainer">
+      <div className="extContainer">
         {allEventsList.map((eachEvent) => {
           return (
             <div className="containerZoom" key={eachEvent._id}>
-            <Card className="divCardList"  >
-              <Card.Img className="cardImg"
-                variant="top"
-                src={eachEvent.imgEvent}
-                alt="Imagen Evento"
-                width={300}
-                
-              />
-              <Card.Body >
-                <Card.Title>{eachEvent.eventName}</Card.Title>
-                <Card.Text>
-                  <p>Sector: {eachEvent.sector}</p>
-                   <p>Fecha inicio: {eachEvent.startDate.slice(0, 10)}</p>
-                  <p>Fecha fin: {eachEvent.endDate.slice(0, 10)}</p>
-                </Card.Text>
+              <Card className="divCardList">
+                <Card.Img
+                  className="cardImg"
+                  variant="top"
+                  src={eachEvent.imgEvent}
+                  alt="Imagen Evento"
+                  width={300}
+                />
+                <Card.Body>
+                  <Card.Title>{eachEvent.eventName}</Card.Title>
+                  <Card.Text>
+                    <p>Sector: {eachEvent.sector}</p>
+                    <p>Fecha inicio: {eachEvent.startDate.slice(0, 10)}</p>
+                    <p>Fecha fin: {eachEvent.endDate.slice(0, 10)}</p>
+                  </Card.Text>
 
-                <Link to={`/events/${eachEvent._id}/details`}>
-                  <Button variant="primary">Detalles</Button>
-                </Link>
-                {/* <button onClick={() => handleInscription(eachEvent._id, eachEvent.capacity)}>Inscribirse/ Cancelar inscripción</button> */}
+                  {!activeUserId ? (
+                    <Link to={"/login"}>
+                      Inicia sesión para ver los detalles
+                    </Link>
+                  ) : (
+                    <Link to={`/events/${eachEvent._id}/details`}>
+                      <Button variant="primary">Detalles</Button>
+                    </Link>
+                  )}
+                  {/* <button onClick={() => handleInscription(eachEvent._id, eachEvent.capacity)}>Inscribirse/ Cancelar inscripción</button> */}
 
-                {errorMessage ? <p>{errorMessage}</p> : null}
-              </Card.Body>
-            </Card>
+                  {errorMessage ? <p>{errorMessage}</p> : null}
+                </Card.Body>
+              </Card>
             </div>
           );
         })}
       </div>
-
-
     </>
   );
 }

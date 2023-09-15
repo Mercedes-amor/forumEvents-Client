@@ -55,11 +55,14 @@ export default function EditEvent() {
   const getData = async () => {
     try {
       const response = await service.get(`/events/${params.eventId}/details`);
-      console.log("prueba response", response.data);
+      // console.log("prueba response", response.data);
      
       setEditEvent(response.data.responseEvent);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
+      if (error.response && error.response.status === 400) {
+        setErrorMessage(error.response.data.errorMessage);
+      }
     }
   };
   const handleUpdateEvent = async (e) => {
@@ -87,7 +90,7 @@ export default function EditEvent() {
     return <h3>...cargando</h3>;
   }
 
-  console.log("edit event", editEvent);
+  // console.log("edit event", editEvent);
   return (
     <div className="formContainer">
           <Form>
