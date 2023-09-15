@@ -2,13 +2,15 @@
 
 ## [See the App!](https://forumevents.netlify.app/)
 
-![App Logo](your-image-logo-path-or-name)
+![Alt text](public/forumEventsLogo.png)
 
 ## Description
 
-App designed to manage a space for events, fairs, congresses, etc.
+Application designed for the management of a fair organization space for all its events, fairs, congresses, concerts, etc.
 
-**NOTE -** 
+Control of capacity, registration for the sessions and payment platform.
+
+
 #### [Client Repo here](https://github.com/Mercedes-amor/forumEvents-Client)
 #### [Server Repo here](https://github.com/Mercedes-amor/forumEvents)
 
@@ -20,7 +22,7 @@ App designed to manage a space for events, fairs, congresses, etc.
 - Event history.
 - Rate events.
 - Comments section.
-- Implement admin can see useres in events
+- Implement admin can see users in events
 
 ## Technologies used
 
@@ -56,7 +58,17 @@ App designed to manage a space for events, fairs, congresses, etc.
 
 ## Client Routes
 
-**NOTE -** Use below table to list your frontend routes
+    "/" Home
+    "/login" Login 
+    "/signup" Signup
+    "/deletedUser" DeletedUser
+    "/events/:query" EventsList
+    "/events/create-event" CreateEvent
+    "/events/:eventId/details" EventDetails
+    "/events/:eventId/edit" EditEvent 
+    "/events/:eventId/:sessionId/:activeUserId" BookSession
+    "/userProfile" UserProfile
+    "/payment-success" PaymentSuccess
 
 ## React Router Routes (React App)
 | Path                      | Page            | Components        | Permissions              | Behavior                                                      |
@@ -104,9 +116,9 @@ App designed to manage a space for events, fairs, congresses, etc.
 
 ### Collaborators
 
-[Developer 1 name](https://github.com/Mercedes-amor)
+[Mercedes Amor](https://github.com/Mercedes-amor)
 
-[Developer 2 name](https://github.com/LucasNavarroR/)
+[Lucs Navarro](https://github.com/LucasNavarroR/)
 
 ### Project
 
@@ -120,6 +132,3 @@ App designed to manage a space for events, fairs, congresses, etc.
 
 [Link to your trello board](https://trello.com/b/wAWJPZuG/forumevents)
 
-### Slides
-
-[Slides Link](www.your-slides-url-here.com)
